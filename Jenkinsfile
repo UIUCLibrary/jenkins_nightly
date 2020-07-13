@@ -52,5 +52,23 @@ pipeline {
                 )
             }
         }
+        stage("HT_checksum_update"){
+            steps{
+                build(
+                    job: 'OpenSourceProjects/HT_checksum_update/master',
+                    parameters: [
+                        string(name: 'PROJECT_NAME', value: 'HathiTrust Checksum Updater'),
+                        booleanParam(name: 'PACKAGE_CX_FREEZE', value: true),
+                        booleanParam(name: 'DEPLOY_SCCM', value: false),
+                        booleanParam(name: 'DEPLOY_DEVPI', value: true),
+                        booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
+                        booleanParam(name: 'UPDATE_DOCS', value: false),
+                        string(name: 'URL_SUBFOLDER', value: 'hathi_checksum_updater')
+                    ]
+                )
+            }
+        }
     }
+
+
 }
