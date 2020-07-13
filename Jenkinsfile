@@ -37,5 +37,20 @@ pipeline {
                 )
             }
         }
+        stage("pyhathiprep"){
+            steps{
+                build(
+                    job: 'OpenSourceProjects/pyhathiprep/master',
+                    parameters: [
+                        booleanParam(name: 'TEST_RUN_TOX', value: true),
+                        booleanParam(name: 'DEPLOY_DEVPI', value: true),
+                        booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
+                        string(name: 'URL_SUBFOLDER', value: 'pyhathiprep'),
+                        booleanParam(name: 'DEPLOY_DOCS', value: false),
+                        booleanParam(name: 'DEPLOY_ADD_TAG', value: false)
+                    ]
+                )
+            }
+        }
     }
 }
