@@ -143,6 +143,23 @@ pipeline {
                 )
             }
         }
+        stage("HathiValidate"){
+            steps{
+                build(
+                    job: 'OpenSourceProjects/HathiValidate/master',
+                    parameters: [
+                        string(name: 'PROJECT_NAME', value: 'Hathi Validate'),
+                        booleanParam(name: 'TEST_RUN_TOX', value: true),
+                        booleanParam(name: 'DEPLOY_DEVPI', value: true),
+                        booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
+                        booleanParam(name: 'DEPLOY_ADD_TAG', value: false),
+                        booleanParam(name: 'DEPLOY_HATHI_TOOL_BETA', value: false),
+                        booleanParam(name: 'DEPLOY_DOCS', value: false),
+                        string(name: 'URL_SUBFOLDER', value: 'hathi_validate')
+                    ]
+                )
+            }
+        }
 //         stage("uiucprescon.imagevalidate"){
 //             steps{
 //             }
