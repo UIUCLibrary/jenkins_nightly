@@ -10,7 +10,7 @@ pipeline {
                     job: 'OpenSourceProjects/tyko/master',
                       parameters: [
                         booleanParam(name: 'FRESH_WORKSPACE', value: false),
-                        booleanParam(name: 'BUILD_CLIENT', value: false),
+                        booleanParam(name: 'BUILD_CLIENT', value: true),
                         booleanParam(name: 'TEST_RUN_TOX', value: true),
                         booleanParam(name: 'DEPLOY_SERVER', value: false)
                       ]
