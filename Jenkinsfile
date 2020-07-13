@@ -160,10 +160,28 @@ pipeline {
                 )
             }
         }
+
+        stage("PackageValidation"){
+            steps{
+                build(
+                    job: 'OpenSourceProjects/PackageValidation/master',
+                    parameters: [
+                        booleanParam(name: 'TEST_RUN_TOX', value: true),
+                        booleanParam(name: 'PACKAGE_CX_FREEZE', value: true),
+                        booleanParam(name: 'DEPLOY_DEVPI', value: true),
+                        booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
+                        booleanParam(name: 'UPDATE_DOCS', value: false),
+                        string(name: 'URL_SUBFOLDER', value: 'package_qc')
+                    ]
+                )
+            }
+        }
+
 //         stage("uiucprescon.imagevalidate"){
 //             steps{
 //             }
 //         }
+
     }
 
 
