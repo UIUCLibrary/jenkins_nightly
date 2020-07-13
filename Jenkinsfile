@@ -127,6 +127,22 @@ pipeline {
                 )
             }
         }
+        stage("DCCMedusaPackager"){
+            steps{
+                build(
+                    job: 'OpenSourceProjects/DCCMedusaPackager/master',
+                    parameters: [
+                        string(name: 'PROJECT_NAME', value: 'Medusa Packager'),
+                        booleanParam(name: 'PACKAGE_CX_FREEZE', value: true),
+                        booleanParam(name: 'DEPLOY_DEVPI', value: true),
+                        booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
+                        booleanParam(name: 'DEPLOY_SCCM', value: false),
+                        booleanParam(name: 'UPDATE_DOCS', value: false),
+                        string(name: 'URL_SUBFOLDER', value: 'DCCMedusaPackager')
+                    ]
+                )
+            }
+        }
 //         stage("uiucprescon.imagevalidate"){
 //             steps{
 //             }
