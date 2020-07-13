@@ -68,6 +68,20 @@ pipeline {
                 )
             }
         }
+        stage("uiucprescon.images"){
+            steps{
+                build(
+                    job: 'OpenSourceProjects/imageprocess/master',
+                    parameters: [
+                        booleanParam(name: 'TEST_RUN_TOX', value: true),
+                        booleanParam(name: 'DEPLOY_DEVPI', value: true),
+                        booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
+                        booleanParam(name: 'DEPLOY_ADD_TAG', value: false),
+                        booleanParam(name: 'DEPLOY_DOCS', value: false)
+                    ]
+                )
+            }
+        }
     }
 
 
