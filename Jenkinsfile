@@ -3,6 +3,9 @@ pipeline {
     triggers {
       cron '0 0 * * *'
     }
+    options {
+      disableConcurrentBuilds()
+    }
     stages{
         stage("Tyko"){
             steps{
