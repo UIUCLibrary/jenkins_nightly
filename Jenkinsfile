@@ -1,5 +1,8 @@
 pipeline {
     agent none
+    triggers {
+      cron '0 0 * * *'
+    }
     stages{
         stage("Tyko"){
             steps{
