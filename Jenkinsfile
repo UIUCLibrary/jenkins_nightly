@@ -8,6 +8,9 @@ pipeline {
     }
     stages{
         stage("Tyko"){
+            options {
+                warnError('Tyko Build failed')
+            }
             steps{
                 build(
                     job: 'OpenSourceProjects/tyko/master',
@@ -21,6 +24,9 @@ pipeline {
             }
         }
         stage("HathiZip"){
+            options {
+                warnError('HathiZip Build failed')
+            }
             steps{
                 build(
                     job: 'OpenSourceProjects/HathiZip/master',
@@ -38,6 +44,9 @@ pipeline {
             }
         }
         stage("pyhathiprep"){
+            options {
+                warnError('pyhathiprep Build failed')
+            }
             steps{
                 build(
                     job: 'OpenSourceProjects/pyhathiprep/master',
@@ -53,6 +62,9 @@ pipeline {
             }
         }
         stage("HT_checksum_update"){
+            options {
+                warnError('HT_checksum_update Build failed')
+            }
             steps{
                 build(
                     job: 'OpenSourceProjects/HT_checksum_update/master',
@@ -69,6 +81,9 @@ pipeline {
             }
         }
         stage("uiucprescon.images"){
+            options {
+                warnError('HT_checksum_update Build failed')
+            }
             steps{
                 build(
                     job: 'OpenSourceProjects/imageprocess/master',
@@ -83,6 +98,9 @@ pipeline {
             }
         }
         stage("uiucprescon.packager"){
+            options {
+                warnError('uiucprescon.packager Build failed')
+            }
             steps{
                 build(
                     job: 'OpenSourceProjects/Packager/master',
@@ -99,6 +117,9 @@ pipeline {
             }
         }
         stage("uiucprescon.imagevalidate"){
+            options {
+                warnError('uiucprescon.imagevalidate Build failed')
+            }
             steps{
                 build(
                     job: 'OpenSourceProjects/imagevalidate/master',
@@ -113,6 +134,9 @@ pipeline {
             }
         }
         stage("pyexiv2bind2"){
+            options {
+                warnError('pyexiv2bind2 Build failed')
+            }
             steps{
                 build(
                     job: 'OpenSourceProjects/pyexiv2bind2/master',
@@ -128,6 +152,9 @@ pipeline {
             }
         }
         stage("DCCMedusaPackager"){
+            options {
+                warnError('DCCMedusaPackager Build failed')
+            }
             steps{
                 build(
                     job: 'OpenSourceProjects/DCCMedusaPackager/master',
@@ -144,6 +171,9 @@ pipeline {
             }
         }
         stage("HathiValidate"){
+            options {
+                warnError('HathiValidate Build failed')
+            }
             steps{
                 build(
                     job: 'OpenSourceProjects/HathiValidate/master',
@@ -162,6 +192,9 @@ pipeline {
         }
 
         stage("PackageValidation"){
+            options {
+                warnError('PackageValidation Build failed')
+            }
             steps{
                 build(
                     job: 'OpenSourceProjects/PackageValidation/master',
@@ -177,6 +210,9 @@ pipeline {
             }
         }
         stage("Speedwagon"){
+            options {
+                warnError('Speedwagon Build failed')
+            }
             steps{
                 build(
                     job: 'OpenSourceProjects/Speedwagon/master',
