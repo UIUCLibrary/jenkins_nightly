@@ -28,7 +28,7 @@ pipeline {
                         warnError('Tyko Build failed')
                     }
                     when{
-                        equals expected: true, actual: param.BUILD_Tyko
+                        equals expected: true, actual: params.BUILD_Tyko
                     }
                     steps{
                         build(
@@ -47,7 +47,7 @@ pipeline {
                         warnError('HathiZip Build failed')
                     }
                     when{
-                        equals expected: true, actual: param.BUILD_HathiZip
+                        equals expected: true, actual: params.BUILD_HathiZip
                     }
                     steps{
                         build(
@@ -70,7 +70,7 @@ pipeline {
                         warnError('pyhathiprep Build failed')
                     }
                     when{
-                        equals expected: true, actual: param.BUILD_pyhathiprep
+                        equals expected: true, actual: params.BUILD_pyhathiprep
                     }
                     steps{
                         build(
@@ -91,7 +91,7 @@ pipeline {
                         warnError('HT_checksum_update Build failed')
                     }
                     when{
-                        equals expected: true, actual: param.BUILD_HT_checksum_update
+                        equals expected: true, actual: params.BUILD_HT_checksum_update
                     }
                     steps{
                         build(
@@ -113,7 +113,7 @@ pipeline {
                         warnError('HT_checksum_update Build failed')
                     }
                     when{
-                        equals expected: true, actual: param.BUILD_uiucprescon_images
+                        equals expected: true, actual: params.BUILD_uiucprescon_images
                     }
                     steps{
                         build(
@@ -133,7 +133,7 @@ pipeline {
                         warnError('uiucprescon.packager Build failed')
                     }
                     when{
-                        equals expected: true, actual: param.BUILD_uiucprescon_packager
+                        equals expected: true, actual: params.BUILD_uiucprescon_packager
                     }
                     steps{
                         build(
@@ -155,7 +155,7 @@ pipeline {
                         warnError('uiucprescon.imagevalidate Build failed')
                     }
                     when{
-                        equals expected: true, actual: param.BUILD_uiucprescon_imagevalidate
+                        equals expected: true, actual: params.BUILD_uiucprescon_imagevalidate
                     }
                     steps{
                         build(
@@ -175,7 +175,7 @@ pipeline {
                         warnError('pyexiv2bind2 Build failed')
                     }
                     when{
-                        equals expected: true, actual: param.BUILD_pyexiv2bind2
+                        equals expected: true, actual: params.BUILD_pyexiv2bind2
                     }
                     steps{
                         build(
@@ -196,7 +196,7 @@ pipeline {
                         warnError('DCCMedusaPackager Build failed')
                     }
                     when{
-                        equals expected: true, actual: param.BUILD_DCCMedusaPackager
+                        equals expected: true, actual: params.BUILD_DCCMedusaPackager
                     }
                     steps{
                         build(
@@ -218,7 +218,7 @@ pipeline {
                         warnError('HathiValidate Build failed')
                     }
                     when{
-                        equals expected: true, actual: param.BUILD_HathiValidate
+                        equals expected: true, actual: params.BUILD_HathiValidate
                     }
                     steps{
                         build(
@@ -242,7 +242,7 @@ pipeline {
                         warnError('PackageValidation Build failed')
                     }
                     when{
-                        equals expected: true, actual: param.BUILD_PackageValidation
+                        equals expected: true, actual: params.BUILD_PackageValidation
                     }
                     steps{
                         build(
@@ -263,7 +263,7 @@ pipeline {
                         warnError('Speedwagon Build failed')
                     }
                     when{
-                        equals expected: true, actual: param.BUILD_speedwagon
+                        equals expected: true, actual: params.BUILD_speedwagon
                     }
                     steps{
                         build(
