@@ -16,6 +16,7 @@ pipeline {
       booleanParam defaultValue: true, description: 'Run nightly build for uiucprescon.imagevalidate', name: "BUILD_uiucprescon_imagevalidate"
       booleanParam defaultValue: true, description: 'Run nightly build for pyexiv2bind2',              name: "BUILD_pyexiv2bind2"
       booleanParam defaultValue: true, description: 'Run nightly build for uiucprescon.getalmarc2',    name: "BUILD_uiucprescon_getalmarc2"
+      booleanParam defaultValue: true, description: 'Run nightly build for uiucprescon.ocr',           name: "BUILD_uiucprescon_ocr"
       booleanParam defaultValue: true, description: 'Run nightly build for DCCMedusaPackager',         name: "BUILD_DCCMedusaPackager"
       booleanParam defaultValue: true, description: 'Run nightly build for HathiValidate',             name: "BUILD_HathiValidate"
       booleanParam defaultValue: true, description: 'Run nightly build for PackageValidation',         name: "BUILD_PackageValidation"
@@ -304,6 +305,28 @@ pipeline {
                                 booleanParam(name: 'BUILD_PACKAGES', value: true),
                                 booleanParam(name: 'DEPLOY_DEVPI', value: true),
                                 booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false)
+                            ]
+                        )
+                    }
+                }
+                 stage("uiucprescon.ocr"){
+                    options {
+                        warnError('uiucprescon.ocr Build failed')
+                    }
+                    when{
+                        equals expected: true, actual: params.BUILD_uiucprescon_ocr
+                    }
+                    steps{
+                        build(
+                            job: 'OpenSourceProjects/Tesseract_Glue/master',
+                            parameters: [
+                                booleanParam(name: 'TEST_RUN_TOX', value: true),
+                                booleanParam(name: 'USE_SONARQUBE', value: true),
+                                booleanParam(name: 'BUILD_PACKAGES', value: true),
+                                booleanParam(name: 'DEPLOY_DEVPI', value: true),
+                                booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
+                                booleanParam(name: 'DEPLOY_ADD_TAG', value: false),
+                                booleanParam(name: 'DEPLOY_DOCS', value: false)
                             ]
                         )
                     }
