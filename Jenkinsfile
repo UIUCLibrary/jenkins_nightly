@@ -278,7 +278,7 @@ pipeline {
                                 booleanParam(name: 'PACKAGE_WINDOWS_STANDALONE_MSI', value: true),
                                 booleanParam(name: 'PACKAGE_WINDOWS_STANDALONE_NSIS', value: false),
                                 booleanParam(name: 'PACKAGE_WINDOWS_STANDALONE_ZIP', value: false),
-                                booleanParam(name: 'PACKAGE_WINDOWS_STANDALONE_CHOLOCATEY', value: false),
+                                booleanParam(name: 'BUILD_CHOCOLATEY_PACKAGE', value: true),
                                 booleanParam(name: 'DEPLOY_DEVPI', value: true),
                                 booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
                                 booleanParam(name: 'DEPLOY_ADD_TAG', value: false),
