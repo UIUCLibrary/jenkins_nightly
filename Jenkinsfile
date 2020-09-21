@@ -21,6 +21,8 @@ pipeline {
       booleanParam defaultValue: true, description: 'Run nightly build for HathiValidate',             name: "BUILD_HathiValidate"
       booleanParam defaultValue: true, description: 'Run nightly build for PackageValidation',         name: "BUILD_PackageValidation"
       booleanParam defaultValue: true, description: 'Run nightly build for speedwagon',                name: "BUILD_speedwagon"
+      booleanParam defaultValue: true, description: 'Run nightly build for getmarcapi',                name: "BUILD_getmarcapi"
+
     }
     stages{
         stage("Run Nightly builds"){
@@ -334,6 +336,27 @@ pipeline {
                         )
                     }
                 }
+            }
+        }
+        stage("getmarcapi"){
+            options {
+                warnError('getmarcapi Build failed')
+            }
+            when{
+                equals expected: true, actual: params.BUILD_getmarcapi
+            }
+            steps{
+                build(
+                    job: 'OpenSourceProjects/getmarcapi/master',
+                    parameters: [
+                        booleanParam(name: 'TEST_RUN_TOX', value: true),
+                        booleanParam(name: 'USE_SONARQUBE', value: true),
+                        booleanParam(name: 'BUILD_PACKAGES', value: true),
+                        booleanParam(name: 'DEPLOY_DEVPI', value: true),
+                        booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
+                        booleanParam(name: 'DEPLOY_DOCS', value: false)
+                    ]
+                )
             }
         }
 //         stage("uiucprescon.imagevalidate"){
