@@ -165,7 +165,11 @@ pipeline {
                         build(
                             job: 'OpenSourceProjects/imagevalidate/master',
                             parameters: [
+                                booleanParam(name: 'RUN_CHECKS', value: true),
                                 booleanParam(name: 'TEST_RUN_TOX', value: true),
+                                booleanParam(name: 'BUILD_PACKAGES', value: true),
+                                booleanParam(name: 'TEST_PACKAGES', value: true),
+                                booleanParam(name: 'BUILD_MAC_PACKAGES', value: true),
                                 booleanParam(name: 'DEPLOY_DEVPI', value: true),
                                 booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
                                 booleanParam(name: 'DEPLOY_DOCS', value: false),
