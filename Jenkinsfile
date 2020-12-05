@@ -192,7 +192,7 @@ pipeline {
                                 booleanParam(name: 'TEST_RUN_TOX', value: true),
                                 booleanParam(name: 'USE_SONARQUBE', value: true),
                                 booleanParam(name: 'DEPLOY_DEVPI', value: true),
-                                booleanParam(name: 'TEST_MAC_PACKAGES', value: true),
+                                booleanParam(name: 'BUILD_MAC_PACKAGES', value: true),
                                 booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
                                 string(name: 'URL_SUBFOLDER', value: 'py3exiv2bind'),
                                 booleanParam(name: 'DEPLOY_DOCS', value: false)
@@ -212,6 +212,7 @@ pipeline {
                             job: 'OpenSourceProjects/DCCMedusaPackager/master',
                             parameters: [
                                 string(name: 'PROJECT_NAME', value: 'Medusa Packager'),
+                                booleanParam(name: 'TEST_RUN_TOX', value: true),
                                 booleanParam(name: 'PACKAGE_CX_FREEZE', value: true),
                                 booleanParam(name: 'DEPLOY_DEVPI', value: true),
                                 booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
@@ -312,6 +313,7 @@ pipeline {
                             parameters: [
                                 booleanParam(name: 'TEST_RUN_TOX', value: true),
                                 booleanParam(name: 'BUILD_PACKAGES', value: true),
+                                booleanParam(name: 'TEST_PACKAGES_ON_MAC', value: true),
                                 booleanParam(name: 'BUILD_CHOCOLATEY_PACKAGE', value: true),
                                 booleanParam(name: 'DEPLOY_DEVPI', value: true),
                                 booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false)
