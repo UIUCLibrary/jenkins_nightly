@@ -238,6 +238,7 @@ pipeline {
                                 string(name: 'PROJECT_NAME', value: 'Hathi Validate'),
                                 booleanParam(name: 'TEST_RUN_TOX', value: true),
                                 booleanParam(name: 'BUILD_PACKAGES', value: true),
+                                booleanParam(name: 'TEST_PACKAGES_ON_MAC', value: true),
                                 booleanParam(name: 'DEPLOY_DEVPI', value: true),
                                 booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
                                 booleanParam(name: 'DEPLOY_ADD_TAG', value: false),
