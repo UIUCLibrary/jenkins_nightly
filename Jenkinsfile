@@ -144,11 +144,13 @@ pipeline {
                         build(
                             job: 'OpenSourceProjects/Packager/master',
                             parameters: [
+                                booleanParam(name: 'RUN_CHECKS', value: true),
                                 booleanParam(name: 'TEST_RUN_TOX', value: true),
                                 booleanParam(name: 'USE_SONARQUBE', value: true),
+                                booleanParam(name: 'BUILD_PACKAGES', value: true),
+                                booleanParam(name: 'TEST_PACKAGES_ON_MAC', value: true),
                                 booleanParam(name: 'DEPLOY_DEVPI', value: true),
                                 booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
-                                booleanParam(name: 'DEPLOY_ADD_TAG', value: false),
                                 booleanParam(name: 'DEPLOY_DOCS', value: false),
                                 string(name: 'DEPLOY_DOCS_URL_SUBFOLDER', value: 'packager')
                             ]
