@@ -103,6 +103,8 @@ pipeline {
                             job: 'OpenSourceProjects/HT_checksum_update/master',
                             parameters: [
                                 string(name: 'PROJECT_NAME', value: 'HathiTrust Checksum Updater'),
+                                booleanParam(name: 'RUN_CHECKS', value: true),
+                                booleanParam(name: 'TEST_RUN_TOX', value: true),
                                 booleanParam(name: 'PACKAGE_CX_FREEZE', value: true),
                                 booleanParam(name: 'DEPLOY_SCCM', value: false),
                                 booleanParam(name: 'DEPLOY_DEVPI', value: true),
