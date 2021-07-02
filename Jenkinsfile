@@ -195,6 +195,7 @@ pipeline {
                             job: 'OpenSourceProjects/pyexiv2bind2/master',
                             parameters: [
                                 booleanParam(name: 'TEST_RUN_TOX', value: true),
+                                booleanParam(name: 'RUN_MEMCHECK', value: true),
                                 booleanParam(name: 'USE_SONARQUBE', value: true),
                                 booleanParam(name: 'DEPLOY_DEVPI', value: true),
                                 booleanParam(name: 'BUILD_MAC_PACKAGES', value: true),
