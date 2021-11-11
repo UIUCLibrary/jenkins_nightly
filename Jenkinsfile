@@ -89,30 +89,30 @@ pipeline {
                         )
                     }
                 }
-                stage("HT_checksum_update"){
-                    options {
-                        warnError('HT_checksum_update Build failed')
-                    }
-                    when{
-                        equals expected: true, actual: params.BUILD_HT_checksum_update
-                    }
-                    steps{
-                        build(
-                            job: 'OpenSourceProjects/HT_checksum_update/master',
-                            parameters: [
-                                string(name: 'PROJECT_NAME', value: 'HathiTrust Checksum Updater'),
-                                booleanParam(name: 'RUN_CHECKS', value: true),
-                                booleanParam(name: 'TEST_RUN_TOX', value: true),
-                                booleanParam(name: 'PACKAGE_CX_FREEZE', value: true),
-                                booleanParam(name: 'DEPLOY_SCCM', value: false),
-                                booleanParam(name: 'DEPLOY_DEVPI', value: true),
-                                booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
-                                booleanParam(name: 'UPDATE_DOCS', value: false),
-                                string(name: 'URL_SUBFOLDER', value: 'hathi_checksum_updater')
-                            ]
-                        )
-                    }
-                }
+//                 stage("HT_checksum_update"){
+//                     options {
+//                         warnError('HT_checksum_update Build failed')
+//                     }
+//                     when{
+//                         equals expected: true, actual: params.BUILD_HT_checksum_update
+//                     }
+//                     steps{
+//                         build(
+//                             job: 'OpenSourceProjects/HT_checksum_update/master',
+//                             parameters: [
+//                                 string(name: 'PROJECT_NAME', value: 'HathiTrust Checksum Updater'),
+//                                 booleanParam(name: 'RUN_CHECKS', value: true),
+//                                 booleanParam(name: 'TEST_RUN_TOX', value: true),
+//                                 booleanParam(name: 'PACKAGE_CX_FREEZE', value: true),
+//                                 booleanParam(name: 'DEPLOY_SCCM', value: false),
+//                                 booleanParam(name: 'DEPLOY_DEVPI', value: true),
+//                                 booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
+//                                 booleanParam(name: 'UPDATE_DOCS', value: false),
+//                                 string(name: 'URL_SUBFOLDER', value: 'hathi_checksum_updater')
+//                             ]
+//                         )
+//                     }
+//                 }
                 stage("uiucprescon.images"){
                     options {
                         warnError('HT_checksum_update Build failed')
@@ -204,29 +204,29 @@ pipeline {
                         )
                     }
                 }
-                stage("DCCMedusaPackager"){
-                    options {
-                        warnError('DCCMedusaPackager Build failed')
-                    }
-                    when{
-                        equals expected: true, actual: params.BUILD_DCCMedusaPackager
-                    }
-                    steps{
-                        build(
-                            job: 'OpenSourceProjects/DCCMedusaPackager/master',
-                            parameters: [
-                                string(name: 'PROJECT_NAME', value: 'Medusa Packager'),
-                                booleanParam(name: 'TEST_RUN_TOX', value: true),
-                                booleanParam(name: 'PACKAGE_CX_FREEZE', value: true),
-                                booleanParam(name: 'DEPLOY_DEVPI', value: true),
-                                booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
-                                booleanParam(name: 'DEPLOY_SCCM', value: false),
-                                booleanParam(name: 'UPDATE_DOCS', value: false),
-                                string(name: 'URL_SUBFOLDER', value: 'DCCMedusaPackager')
-                            ]
-                        )
-                    }
-                }
+//                 stage("DCCMedusaPackager"){
+//                     options {
+//                         warnError('DCCMedusaPackager Build failed')
+//                     }
+//                     when{
+//                         equals expected: true, actual: params.BUILD_DCCMedusaPackager
+//                     }
+//                     steps{
+//                         build(
+//                             job: 'OpenSourceProjects/DCCMedusaPackager/master',
+//                             parameters: [
+//                                 string(name: 'PROJECT_NAME', value: 'Medusa Packager'),
+//                                 booleanParam(name: 'TEST_RUN_TOX', value: true),
+//                                 booleanParam(name: 'PACKAGE_CX_FREEZE', value: true),
+//                                 booleanParam(name: 'DEPLOY_DEVPI', value: true),
+//                                 booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
+//                                 booleanParam(name: 'DEPLOY_SCCM', value: false),
+//                                 booleanParam(name: 'UPDATE_DOCS', value: false),
+//                                 string(name: 'URL_SUBFOLDER', value: 'DCCMedusaPackager')
+//                             ]
+//                         )
+//                     }
+//                 }
                 stage("HathiValidate"){
                     options {
                         warnError('HathiValidate Build failed')
