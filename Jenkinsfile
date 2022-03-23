@@ -7,7 +7,7 @@ pipeline {
       disableConcurrentBuilds()
     }
     parameters {
-//       booleanParam defaultValue: true, description: 'Run nightly build for Tyko',                      name: "BUILD_Tyko"
+      booleanParam defaultValue: true, description: 'Run nightly build for Tyko',                      name: "BUILD_Tyko"
       booleanParam defaultValue: true, description: 'Run nightly build for HathiZip',                  name: "BUILD_HathiZip"
       booleanParam defaultValue: true, description: 'Run nightly build for pyhathiprep',               name: "BUILD_pyhathiprep"
       booleanParam defaultValue: true, description: 'Run nightly build for uiucprescon.images',        name: "BUILD_uiucprescon_images"
@@ -25,25 +25,25 @@ pipeline {
     stages{
         stage("Run Nightly builds"){
             parallel{
-//                 stage("Tyko"){
-//                     options {
-//                         warnError('Tyko Build failed')
-//                     }
-//                     when{
-//                         equals expected: true, actual: params.BUILD_Tyko
-//                     }
-//                     steps{
-//                         build(
-//                             job: 'OpenSourceProjects/tyko/master',
-//                               parameters: [
-//                                 booleanParam(name: 'FRESH_WORKSPACE', value: false),
-//                                 booleanParam(name: 'BUILD_CLIENT', value: true),
-//                                 booleanParam(name: 'TEST_RUN_TOX', value: true),
-//                                 booleanParam(name: 'DEPLOY_SERVER', value: false)
-//                               ]
-//                             )
-//                     }
-//                 }
+                stage("Tyko"){
+                    options {
+                        warnError('Tyko Build failed')
+                    }
+                    when{
+                        equals expected: true, actual: params.BUILD_Tyko
+                    }
+                    steps{
+                        build(
+                            job: 'OpenSourceProjects/tyko/master',
+                              parameters: [
+                                booleanParam(name: 'USE_SONARQUBE', value: true),
+                                booleanParam(name: 'TEST_RUN_TOX', value: true),
+                                booleanParam(name: 'DEPLOY_SERVER', value: false),
+                                booleanParam(name: 'DEPLOY_DOCS', value: false)
+                              ]
+                            )
+                    }
+                }
                 stage("HathiZip"){
                     options {
                         warnError('HathiZip Build failed')
