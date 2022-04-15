@@ -61,6 +61,7 @@ pipeline {
                                 booleanParam(name: 'TEST_PACKAGES_ON_MAC', value: true),
                                 booleanParam(name: 'PACKAGE_CX_FREEZE', value: true),
                                 booleanParam(name: 'DEPLOY_DEVPI', value: true),
+                                booleanParam(name: 'INCLUDE_ARM', value: true),
                                 booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
                                 booleanParam(name: 'DEPLOY_SCCM', value: false),
                                 booleanParam(name: 'UPDATE_DOCS', value: false)
