@@ -33,15 +33,17 @@ pipeline {
                         equals expected: true, actual: params.BUILD_Tyko
                     }
                     steps{
-                        build(
-                            job: 'OpenSourceProjects/tyko/master',
-                              parameters: [
-                                booleanParam(name: 'USE_SONARQUBE', value: true),
-                                booleanParam(name: 'TEST_RUN_TOX', value: true),
-                                booleanParam(name: 'DEPLOY_SERVER', value: false),
-                                booleanParam(name: 'DEPLOY_DOCS', value: false)
-                              ]
-                            )
+                        retry(2){
+                            build(
+                                job: 'OpenSourceProjects/tyko/master',
+                                  parameters: [
+                                    booleanParam(name: 'USE_SONARQUBE', value: true),
+                                    booleanParam(name: 'TEST_RUN_TOX', value: true),
+                                    booleanParam(name: 'DEPLOY_SERVER', value: false),
+                                    booleanParam(name: 'DEPLOY_DOCS', value: false)
+                                  ]
+                                )
+                        }
                     }
                 }
                 stage("HathiZip"){
@@ -52,21 +54,23 @@ pipeline {
                         equals expected: true, actual: params.BUILD_HathiZip
                     }
                     steps{
-                        build(
-                            job: 'OpenSourceProjects/HathiZip/master',
-                            parameters: [
-                                string(name: 'PROJECT_NAME', value: 'HathiTrust Zip for Submit'),
-                                booleanParam(name: 'TEST_RUN_TOX', value: true),
-                                booleanParam(name: 'TEST_PACKAGES', value: true),
-                                booleanParam(name: 'TEST_PACKAGES_ON_MAC', value: true),
-                                booleanParam(name: 'PACKAGE_CX_FREEZE', value: true),
-                                booleanParam(name: 'DEPLOY_DEVPI', value: true),
-                                booleanParam(name: 'INCLUDE_ARM', value: true),
-                                booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
-                                booleanParam(name: 'DEPLOY_SCCM', value: false),
-                                booleanParam(name: 'UPDATE_DOCS', value: false)
-                            ]
-                        )
+                        retry(2){
+                            build(
+                                job: 'OpenSourceProjects/HathiZip/master',
+                                parameters: [
+                                    string(name: 'PROJECT_NAME', value: 'HathiTrust Zip for Submit'),
+                                    booleanParam(name: 'TEST_RUN_TOX', value: true),
+                                    booleanParam(name: 'TEST_PACKAGES', value: true),
+                                    booleanParam(name: 'TEST_PACKAGES_ON_MAC', value: true),
+                                    booleanParam(name: 'PACKAGE_CX_FREEZE', value: true),
+                                    booleanParam(name: 'DEPLOY_DEVPI', value: true),
+                                    booleanParam(name: 'INCLUDE_ARM', value: true),
+                                    booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
+                                    booleanParam(name: 'DEPLOY_SCCM', value: false),
+                                    booleanParam(name: 'UPDATE_DOCS', value: false)
+                                ]
+                            )
+                        }
                     }
                 }
                 stage("pyhathiprep"){
@@ -77,17 +81,19 @@ pipeline {
                         equals expected: true, actual: params.BUILD_pyhathiprep
                     }
                     steps{
-                        build(
-                            job: 'OpenSourceProjects/pyhathiprep/master',
-                            parameters: [
-                                booleanParam(name: 'TEST_RUN_TOX', value: true),
-                                booleanParam(name: 'DEPLOY_DEVPI', value: true),
-                                booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
-                                string(name: 'URL_SUBFOLDER', value: 'pyhathiprep'),
-                                booleanParam(name: 'DEPLOY_DOCS', value: false),
-                                booleanParam(name: 'DEPLOY_ADD_TAG', value: false)
-                            ]
-                        )
+                        retry(2){
+                            build(
+                                job: 'OpenSourceProjects/pyhathiprep/master',
+                                parameters: [
+                                    booleanParam(name: 'TEST_RUN_TOX', value: true),
+                                    booleanParam(name: 'DEPLOY_DEVPI', value: true),
+                                    booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
+                                    string(name: 'URL_SUBFOLDER', value: 'pyhathiprep'),
+                                    booleanParam(name: 'DEPLOY_DOCS', value: false),
+                                    booleanParam(name: 'DEPLOY_ADD_TAG', value: false)
+                                ]
+                            )
+                        }
                     }
                 }
 //                 stage("HT_checksum_update"){
@@ -122,16 +128,18 @@ pipeline {
                         equals expected: true, actual: params.BUILD_uiucprescon_images
                     }
                     steps{
-                        build(
-                            job: 'OpenSourceProjects/imageprocess/master',
-                            parameters: [
-                                booleanParam(name: 'TEST_RUN_TOX', value: true),
-                                booleanParam(name: 'DEPLOY_DEVPI', value: true),
-                                booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
-                                booleanParam(name: 'DEPLOY_ADD_TAG', value: false),
-                                booleanParam(name: 'DEPLOY_DOCS', value: false)
-                            ]
-                        )
+                        retry(2){
+                            build(
+                                job: 'OpenSourceProjects/imageprocess/master',
+                                parameters: [
+                                    booleanParam(name: 'TEST_RUN_TOX', value: true),
+                                    booleanParam(name: 'DEPLOY_DEVPI', value: true),
+                                    booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
+                                    booleanParam(name: 'DEPLOY_ADD_TAG', value: false),
+                                    booleanParam(name: 'DEPLOY_DOCS', value: false)
+                                ]
+                            )
+                        }
                     }
                 }
                 stage("uiucprescon.packager"){
@@ -142,20 +150,22 @@ pipeline {
                         equals expected: true, actual: params.BUILD_uiucprescon_packager
                     }
                     steps{
-                        build(
-                            job: 'OpenSourceProjects/Packager/master',
-                            parameters: [
-                                booleanParam(name: 'RUN_CHECKS', value: true),
-                                booleanParam(name: 'TEST_RUN_TOX', value: true),
-                                booleanParam(name: 'USE_SONARQUBE', value: true),
-                                booleanParam(name: 'BUILD_PACKAGES', value: true),
-                                booleanParam(name: 'TEST_PACKAGES_ON_MAC', value: true),
-                                booleanParam(name: 'DEPLOY_DEVPI', value: true),
-                                booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
-                                booleanParam(name: 'DEPLOY_DOCS', value: false),
-                                string(name: 'DEPLOY_DOCS_URL_SUBFOLDER', value: 'packager')
-                            ]
-                        )
+                        retry(2){
+                            build(
+                                job: 'OpenSourceProjects/Packager/master',
+                                parameters: [
+                                    booleanParam(name: 'RUN_CHECKS', value: true),
+                                    booleanParam(name: 'TEST_RUN_TOX', value: true),
+                                    booleanParam(name: 'USE_SONARQUBE', value: true),
+                                    booleanParam(name: 'BUILD_PACKAGES', value: true),
+                                    booleanParam(name: 'TEST_PACKAGES_ON_MAC', value: true),
+                                    booleanParam(name: 'DEPLOY_DEVPI', value: true),
+                                    booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
+                                    booleanParam(name: 'DEPLOY_DOCS', value: false),
+                                    string(name: 'DEPLOY_DOCS_URL_SUBFOLDER', value: 'packager')
+                                ]
+                            )
+                        }
                     }
                 }
                 stage("uiucprescon.imagevalidate"){
@@ -166,20 +176,22 @@ pipeline {
                         equals expected: true, actual: params.BUILD_uiucprescon_imagevalidate
                     }
                     steps{
-                        build(
-                            job: 'OpenSourceProjects/imagevalidate/master',
-                            parameters: [
-                                booleanParam(name: 'RUN_CHECKS', value: true),
-                                booleanParam(name: 'TEST_RUN_TOX', value: true),
-                                booleanParam(name: 'BUILD_PACKAGES', value: true),
-                                booleanParam(name: 'TEST_PACKAGES', value: true),
-                                booleanParam(name: 'BUILD_MAC_PACKAGES', value: true),
-                                booleanParam(name: 'DEPLOY_DEVPI', value: true),
-                                booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
-                                booleanParam(name: 'DEPLOY_DOCS', value: false),
-                                string(name: 'DEPLOY_DOCS_URL_SUBFOLDER', value: 'imagevalidate')
-                            ]
-                        )
+                        retry(2){
+                            build(
+                                job: 'OpenSourceProjects/imagevalidate/master',
+                                parameters: [
+                                    booleanParam(name: 'RUN_CHECKS', value: true),
+                                    booleanParam(name: 'TEST_RUN_TOX', value: true),
+                                    booleanParam(name: 'BUILD_PACKAGES', value: true),
+                                    booleanParam(name: 'TEST_PACKAGES', value: true),
+                                    booleanParam(name: 'BUILD_MAC_PACKAGES', value: true),
+                                    booleanParam(name: 'DEPLOY_DEVPI', value: true),
+                                    booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
+                                    booleanParam(name: 'DEPLOY_DOCS', value: false),
+                                    string(name: 'DEPLOY_DOCS_URL_SUBFOLDER', value: 'imagevalidate')
+                                ]
+                            )
+                        }
                     }
                 }
                 stage("pyexiv2bind2"){
@@ -190,19 +202,21 @@ pipeline {
                         equals expected: true, actual: params.BUILD_pyexiv2bind2
                     }
                     steps{
-                        build(
-                            job: 'OpenSourceProjects/pyexiv2bind2/master',
-                            parameters: [
-                                booleanParam(name: 'TEST_RUN_TOX', value: true),
-                                booleanParam(name: 'RUN_MEMCHECK', value: true),
-                                booleanParam(name: 'USE_SONARQUBE', value: true),
-                                booleanParam(name: 'DEPLOY_DEVPI', value: true),
-                                booleanParam(name: 'BUILD_MAC_PACKAGES', value: true),
-                                booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
-                                string(name: 'URL_SUBFOLDER', value: 'py3exiv2bind'),
-                                booleanParam(name: 'DEPLOY_DOCS', value: false)
-                            ]
-                        )
+                        retry(2){
+                            build(
+                                job: 'OpenSourceProjects/pyexiv2bind2/master',
+                                parameters: [
+                                    booleanParam(name: 'TEST_RUN_TOX', value: true),
+                                    booleanParam(name: 'RUN_MEMCHECK', value: true),
+                                    booleanParam(name: 'USE_SONARQUBE', value: true),
+                                    booleanParam(name: 'DEPLOY_DEVPI', value: true),
+                                    booleanParam(name: 'BUILD_MAC_PACKAGES', value: true),
+                                    booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
+                                    string(name: 'URL_SUBFOLDER', value: 'py3exiv2bind'),
+                                    booleanParam(name: 'DEPLOY_DOCS', value: false)
+                                ]
+                            )
+                        }
                     }
                 }
 //                 stage("DCCMedusaPackager"){
@@ -236,21 +250,23 @@ pipeline {
                         equals expected: true, actual: params.BUILD_HathiValidate
                     }
                     steps{
-                        build(
-                            job: 'OpenSourceProjects/HathiValidate/master',
-                            parameters: [
-                                string(name: 'PROJECT_NAME', value: 'Hathi Validate'),
-                                booleanParam(name: 'TEST_RUN_TOX', value: true),
-                                booleanParam(name: 'BUILD_PACKAGES', value: true),
-                                booleanParam(name: 'TEST_PACKAGES_ON_MAC', value: true),
-                                booleanParam(name: 'DEPLOY_DEVPI', value: true),
-                                booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
-                                booleanParam(name: 'DEPLOY_ADD_TAG', value: false),
-                                booleanParam(name: 'DEPLOY_HATHI_TOOL_BETA', value: false),
-                                booleanParam(name: 'DEPLOY_DOCS', value: false),
-                                string(name: 'URL_SUBFOLDER', value: 'hathi_validate')
-                            ]
-                        )
+                        retry(2){
+                            build(
+                                job: 'OpenSourceProjects/HathiValidate/master',
+                                parameters: [
+                                    string(name: 'PROJECT_NAME', value: 'Hathi Validate'),
+                                    booleanParam(name: 'TEST_RUN_TOX', value: true),
+                                    booleanParam(name: 'BUILD_PACKAGES', value: true),
+                                    booleanParam(name: 'TEST_PACKAGES_ON_MAC', value: true),
+                                    booleanParam(name: 'DEPLOY_DEVPI', value: true),
+                                    booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
+                                    booleanParam(name: 'DEPLOY_ADD_TAG', value: false),
+                                    booleanParam(name: 'DEPLOY_HATHI_TOOL_BETA', value: false),
+                                    booleanParam(name: 'DEPLOY_DOCS', value: false),
+                                    string(name: 'URL_SUBFOLDER', value: 'hathi_validate')
+                                ]
+                            )
+                        }
                     }
                 }
 
@@ -262,17 +278,19 @@ pipeline {
                         equals expected: true, actual: params.BUILD_PackageValidation
                     }
                     steps{
-                        build(
-                            job: 'OpenSourceProjects/PackageValidation/master',
-                            parameters: [
-                                booleanParam(name: 'TEST_RUN_TOX', value: true),
-                                booleanParam(name: 'PACKAGE_CX_FREEZE', value: true),
-                                booleanParam(name: 'DEPLOY_DEVPI', value: true),
-                                booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
-                                booleanParam(name: 'UPDATE_DOCS', value: false),
-                                string(name: 'URL_SUBFOLDER', value: 'package_qc')
-                            ]
-                        )
+                        retry(2){
+                            build(
+                                job: 'OpenSourceProjects/PackageValidation/master',
+                                parameters: [
+                                    booleanParam(name: 'TEST_RUN_TOX', value: true),
+                                    booleanParam(name: 'PACKAGE_CX_FREEZE', value: true),
+                                    booleanParam(name: 'DEPLOY_DEVPI', value: true),
+                                    booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
+                                    booleanParam(name: 'UPDATE_DOCS', value: false),
+                                    string(name: 'URL_SUBFOLDER', value: 'package_qc')
+                                ]
+                            )
+                        }
                     }
                 }
                 stage("Speedwagon"){
@@ -283,27 +301,29 @@ pipeline {
                         equals expected: true, actual: params.BUILD_speedwagon
                     }
                     steps{
-                        build(
-                            job: 'OpenSourceProjects/Speedwagon/master',
-                            parameters: [
-                                string(name: 'JIRA_ISSUE_VALUE', value: 'PSR-83'),
-                                booleanParam(name: 'TEST_RUN_TOX', value: true),
-                                booleanParam(name: 'USE_SONARQUBE', value: true),
-                                booleanParam(name: 'PACKAGE_WINDOWS_STANDALONE_MSI', value: true),
-                                booleanParam(name: 'PACKAGE_WINDOWS_STANDALONE_NSIS', value: true),
-                                booleanParam(name: 'PACKAGE_WINDOWS_STANDALONE_ZIP', value: true),
-                                booleanParam(name: 'PACKAGE_MAC_OS_STANDALONE_DMG', value: true),
-                                booleanParam(name: 'TEST_PACKAGES_ON_MAC', value: true),
-                                booleanParam(name: 'BUILD_CHOCOLATEY_PACKAGE', value: true),
-                                booleanParam(name: 'DEPLOY_DEVPI', value: true),
-                                booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
-                                booleanParam(name: 'DEPLOY_CHOLOCATEY', value: false),
-                                booleanParam(name: 'DEPLOY_HATHI_TOOL_BETA', value: false),
-                                booleanParam(name: 'DEPLOY_SCCM', value: false),
-                                booleanParam(name: 'DEPLOY_DOCS', value: false),
-                                string(name: 'DEPLOY_DOCS_URL_SUBFOLDER', value: 'speedwagon')
-                            ]
-                        )
+                        retry(2){
+                            build(
+                                job: 'OpenSourceProjects/Speedwagon/master',
+                                parameters: [
+                                    string(name: 'JIRA_ISSUE_VALUE', value: 'PSR-83'),
+                                    booleanParam(name: 'TEST_RUN_TOX', value: true),
+                                    booleanParam(name: 'USE_SONARQUBE', value: true),
+                                    booleanParam(name: 'PACKAGE_WINDOWS_STANDALONE_MSI', value: true),
+                                    booleanParam(name: 'PACKAGE_WINDOWS_STANDALONE_NSIS', value: true),
+                                    booleanParam(name: 'PACKAGE_WINDOWS_STANDALONE_ZIP', value: true),
+                                    booleanParam(name: 'PACKAGE_MAC_OS_STANDALONE_DMG', value: true),
+                                    booleanParam(name: 'TEST_PACKAGES_ON_MAC', value: true),
+                                    booleanParam(name: 'BUILD_CHOCOLATEY_PACKAGE', value: true),
+                                    booleanParam(name: 'DEPLOY_DEVPI', value: true),
+                                    booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
+                                    booleanParam(name: 'DEPLOY_CHOLOCATEY', value: false),
+                                    booleanParam(name: 'DEPLOY_HATHI_TOOL_BETA', value: false),
+                                    booleanParam(name: 'DEPLOY_SCCM', value: false),
+                                    booleanParam(name: 'DEPLOY_DOCS', value: false),
+                                    string(name: 'DEPLOY_DOCS_URL_SUBFOLDER', value: 'speedwagon')
+                                ]
+                            )
+                        }
                     }
                 }
                 stage("uiucprescon.getalmarc2"){
@@ -314,17 +334,19 @@ pipeline {
                         equals expected: true, actual: params.BUILD_uiucprescon_getalmarc2
                     }
                     steps{
-                        build(
-                            job: 'OpenSourceProjects/uiucprescon.getalmarc2/master',
-                            parameters: [
-                                booleanParam(name: 'TEST_RUN_TOX', value: true),
-                                booleanParam(name: 'BUILD_PACKAGES', value: true),
-                                booleanParam(name: 'TEST_PACKAGES_ON_MAC', value: true),
-                                booleanParam(name: 'BUILD_CHOCOLATEY_PACKAGE', value: true),
-                                booleanParam(name: 'DEPLOY_DEVPI', value: true),
-                                booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false)
-                            ]
-                        )
+                        retry(2){
+                            build(
+                                job: 'OpenSourceProjects/uiucprescon.getalmarc2/master',
+                                parameters: [
+                                    booleanParam(name: 'TEST_RUN_TOX', value: true),
+                                    booleanParam(name: 'BUILD_PACKAGES', value: true),
+                                    booleanParam(name: 'TEST_PACKAGES_ON_MAC', value: true),
+                                    booleanParam(name: 'BUILD_CHOCOLATEY_PACKAGE', value: true),
+                                    booleanParam(name: 'DEPLOY_DEVPI', value: true),
+                                    booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false)
+                                ]
+                            )
+                        }
                     }
                 }
                  stage("uiucprescon.ocr"){
@@ -335,20 +357,22 @@ pipeline {
                         equals expected: true, actual: params.BUILD_uiucprescon_ocr
                     }
                     steps{
-                        build(
-                            job: 'OpenSourceProjects/Tesseract_Glue/master',
-                            parameters: [
-                                booleanParam(name: 'RUN_CHECKS', value: true),
-                                booleanParam(name: 'TEST_RUN_TOX', value: true),
-                                booleanParam(name: 'USE_SONARQUBE', value: true),
-                                booleanParam(name: 'BUILD_PACKAGES', value: true),
-                                booleanParam(name: 'BUILD_MAC_PACKAGES', value: true),
-                                booleanParam(name: 'TEST_PACKAGES', value: true),
-                                booleanParam(name: 'DEPLOY_DEVPI', value: true),
-                                booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
-                                booleanParam(name: 'DEPLOY_DOCS', value: false)
-                            ]
-                        )
+                        retry(2){
+                            build(
+                                job: 'OpenSourceProjects/Tesseract_Glue/master',
+                                parameters: [
+                                    booleanParam(name: 'RUN_CHECKS', value: true),
+                                    booleanParam(name: 'TEST_RUN_TOX', value: true),
+                                    booleanParam(name: 'USE_SONARQUBE', value: true),
+                                    booleanParam(name: 'BUILD_PACKAGES', value: true),
+                                    booleanParam(name: 'BUILD_MAC_PACKAGES', value: true),
+                                    booleanParam(name: 'TEST_PACKAGES', value: true),
+                                    booleanParam(name: 'DEPLOY_DEVPI', value: true),
+                                    booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
+                                    booleanParam(name: 'DEPLOY_DOCS', value: false)
+                                ]
+                            )
+                        }
                     }
                 }
                 stage("getmarcapi"){
@@ -359,17 +383,19 @@ pipeline {
                         equals expected: true, actual: params.BUILD_getmarcapi
                     }
                     steps{
-                        build(
-                            job: 'OpenSourceProjects/getmarcapi/master',
-                            parameters: [
-                                booleanParam(name: 'TEST_RUN_TOX', value: true),
-                                booleanParam(name: 'USE_SONARQUBE', value: true),
-                                booleanParam(name: 'BUILD_PACKAGES', value: true),
-                                booleanParam(name: 'DEPLOY_DEVPI', value: true),
-                                booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
-                                booleanParam(name: 'DEPLOY_DOCS', value: false)
-                            ]
-                        )
+                        retry(2){
+                            build(
+                                job: 'OpenSourceProjects/getmarcapi/master',
+                                parameters: [
+                                    booleanParam(name: 'TEST_RUN_TOX', value: true),
+                                    booleanParam(name: 'USE_SONARQUBE', value: true),
+                                    booleanParam(name: 'BUILD_PACKAGES', value: true),
+                                    booleanParam(name: 'DEPLOY_DEVPI', value: true),
+                                    booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
+                                    booleanParam(name: 'DEPLOY_DOCS', value: false)
+                                ]
+                            )
+                        }
                     }
                 }
             }
