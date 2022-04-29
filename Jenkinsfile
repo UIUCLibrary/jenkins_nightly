@@ -185,6 +185,7 @@ pipeline {
                                     booleanParam(name: 'BUILD_PACKAGES', value: true),
                                     booleanParam(name: 'TEST_PACKAGES', value: true),
                                     booleanParam(name: 'BUILD_MAC_PACKAGES', value: true),
+                                    booleanParam(name: 'INCLUDE_ARM', value: true),
                                     booleanParam(name: 'DEPLOY_DEVPI', value: true),
                                     booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
                                     booleanParam(name: 'DEPLOY_DOCS', value: false),
@@ -211,6 +212,7 @@ pipeline {
                                     booleanParam(name: 'USE_SONARQUBE', value: true),
                                     booleanParam(name: 'DEPLOY_DEVPI', value: true),
                                     booleanParam(name: 'BUILD_MAC_PACKAGES', value: true),
+                                    booleanParam(name: 'INCLUDE_ARM', value: true),
                                     booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
                                     string(name: 'URL_SUBFOLDER', value: 'py3exiv2bind'),
                                     booleanParam(name: 'DEPLOY_DOCS', value: false)
