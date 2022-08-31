@@ -370,6 +370,7 @@ pipeline {
                                     booleanParam(name: 'INCLUDE_ARM', value: true),
                                     booleanParam(name: 'BUILD_MAC_PACKAGES', value: true),
                                     booleanParam(name: 'TEST_PACKAGES', value: true),
+                                    booleanParam(name: 'BUILD_MANYLINUX_PACKAGES', value: true),
                                     booleanParam(name: 'DEPLOY_DEVPI', value: true),
                                     booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
                                     booleanParam(name: 'DEPLOY_DOCS', value: false)
