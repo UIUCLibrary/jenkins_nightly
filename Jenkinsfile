@@ -63,7 +63,7 @@ pipeline {
                                     booleanParam(name: 'TEST_PACKAGES', value: true),
                                     booleanParam(name: 'TEST_PACKAGES_ON_MAC', value: true),
                                     booleanParam(name: 'PACKAGE_CX_FREEZE', value: true),
-                                    booleanParam(name: 'DEPLOY_DEVPI', value: true),
+                                    booleanParam(name: 'DEPLOY_DEVPI', value: false),
                                     booleanParam(name: 'INCLUDE_ARM', value: true),
                                     booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
                                     booleanParam(name: 'DEPLOY_SCCM', value: false),
@@ -86,7 +86,7 @@ pipeline {
                                 job: 'OpenSourceProjects/pyhathiprep/master',
                                 parameters: [
                                     booleanParam(name: 'TEST_RUN_TOX', value: true),
-                                    booleanParam(name: 'DEPLOY_DEVPI', value: true),
+                                    booleanParam(name: 'DEPLOY_DEVPI', value: false),
                                     booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
                                     string(name: 'URL_SUBFOLDER', value: 'pyhathiprep'),
                                     booleanParam(name: 'DEPLOY_DOCS', value: false),
@@ -133,7 +133,7 @@ pipeline {
                                 job: 'OpenSourceProjects/imageprocess/master',
                                 parameters: [
                                     booleanParam(name: 'TEST_RUN_TOX', value: true),
-                                    booleanParam(name: 'DEPLOY_DEVPI', value: true),
+                                    booleanParam(name: 'DEPLOY_DEVPI', value: false),
                                     booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
                                     booleanParam(name: 'DEPLOY_ADD_TAG', value: false),
                                     booleanParam(name: 'DEPLOY_DOCS', value: false)
@@ -159,7 +159,7 @@ pipeline {
                                     booleanParam(name: 'USE_SONARQUBE', value: true),
                                     booleanParam(name: 'BUILD_PACKAGES', value: true),
                                     booleanParam(name: 'TEST_PACKAGES_ON_MAC', value: true),
-                                    booleanParam(name: 'DEPLOY_DEVPI', value: true),
+                                    booleanParam(name: 'DEPLOY_DEVPI', value: false),
                                     booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
                                     booleanParam(name: 'DEPLOY_DOCS', value: false),
                                     string(name: 'DEPLOY_DOCS_URL_SUBFOLDER', value: 'packager')
@@ -186,7 +186,7 @@ pipeline {
                                     booleanParam(name: 'TEST_PACKAGES', value: true),
                                     booleanParam(name: 'BUILD_MAC_PACKAGES', value: true),
                                     booleanParam(name: 'INCLUDE_ARM', value: true),
-                                    booleanParam(name: 'DEPLOY_DEVPI', value: true),
+                                    booleanParam(name: 'DEPLOY_DEVPI', value: false),
                                     booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
                                     booleanParam(name: 'DEPLOY_DOCS', value: false),
                                     string(name: 'DEPLOY_DOCS_URL_SUBFOLDER', value: 'imagevalidate')
@@ -210,7 +210,7 @@ pipeline {
                                     booleanParam(name: 'TEST_RUN_TOX', value: true),
                                     booleanParam(name: 'RUN_MEMCHECK', value: true),
                                     booleanParam(name: 'USE_SONARQUBE', value: true),
-                                    booleanParam(name: 'DEPLOY_DEVPI', value: true),
+                                    booleanParam(name: 'DEPLOY_DEVPI', value: false),
                                     booleanParam(name: 'BUILD_MAC_PACKAGES', value: true),
                                     booleanParam(name: 'INCLUDE_ARM', value: true),
                                     booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
@@ -260,7 +260,7 @@ pipeline {
                                     booleanParam(name: 'TEST_RUN_TOX', value: true),
                                     booleanParam(name: 'BUILD_PACKAGES', value: true),
                                     booleanParam(name: 'TEST_PACKAGES_ON_MAC', value: true),
-                                    booleanParam(name: 'DEPLOY_DEVPI', value: true),
+                                    booleanParam(name: 'DEPLOY_DEVPI', value: false),
                                     booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
                                     booleanParam(name: 'DEPLOY_ADD_TAG', value: false),
                                     booleanParam(name: 'DEPLOY_HATHI_TOOL_BETA', value: false),
@@ -286,7 +286,7 @@ pipeline {
                                 parameters: [
                                     booleanParam(name: 'TEST_RUN_TOX', value: true),
                                     booleanParam(name: 'PACKAGE_CX_FREEZE', value: true),
-                                    booleanParam(name: 'DEPLOY_DEVPI', value: true),
+                                    booleanParam(name: 'DEPLOY_DEVPI', value: false),
                                     booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
                                     booleanParam(name: 'UPDATE_DOCS', value: false),
                                     string(name: 'URL_SUBFOLDER', value: 'package_qc')
@@ -316,7 +316,7 @@ pipeline {
                                     booleanParam(name: 'PACKAGE_MAC_OS_STANDALONE_DMG', value: true),
                                     booleanParam(name: 'TEST_PACKAGES_ON_MAC', value: true),
                                     booleanParam(name: 'BUILD_CHOCOLATEY_PACKAGE', value: true),
-                                    booleanParam(name: 'DEPLOY_DEVPI', value: true),
+                                    booleanParam(name: 'DEPLOY_DEVPI', value: false),
                                     booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
                                     booleanParam(name: 'DEPLOY_CHOLOCATEY', value: false),
                                     booleanParam(name: 'DEPLOY_HATHI_TOOL_BETA', value: false),
@@ -344,7 +344,7 @@ pipeline {
                                     booleanParam(name: 'BUILD_PACKAGES', value: true),
                                     booleanParam(name: 'TEST_PACKAGES_ON_MAC', value: true),
                                     booleanParam(name: 'BUILD_CHOCOLATEY_PACKAGE', value: true),
-                                    booleanParam(name: 'DEPLOY_DEVPI', value: true),
+                                    booleanParam(name: 'DEPLOY_DEVPI', value: false),
                                     booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false)
                                 ]
                             )
@@ -371,7 +371,7 @@ pipeline {
                                     booleanParam(name: 'BUILD_MAC_PACKAGES', value: true),
                                     booleanParam(name: 'TEST_PACKAGES', value: true),
                                     booleanParam(name: 'BUILD_MANYLINUX_PACKAGES', value: true),
-                                    booleanParam(name: 'DEPLOY_DEVPI', value: true),
+                                    booleanParam(name: 'DEPLOY_DEVPI', value: false),
                                     booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
                                     booleanParam(name: 'DEPLOY_DOCS', value: false)
                                 ]
@@ -394,7 +394,7 @@ pipeline {
                                     booleanParam(name: 'TEST_RUN_TOX', value: true),
                                     booleanParam(name: 'USE_SONARQUBE', value: true),
                                     booleanParam(name: 'BUILD_PACKAGES', value: true),
-                                    booleanParam(name: 'DEPLOY_DEVPI', value: true),
+                                    booleanParam(name: 'DEPLOY_DEVPI', value: false),
                                     booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
                                     booleanParam(name: 'DEPLOY_DOCS', value: false)
                                 ]
