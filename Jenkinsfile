@@ -21,6 +21,7 @@ pipeline {
       booleanParam defaultValue: true, description: 'Run nightly build for speedwagon',                name: "BUILD_speedwagon"
       booleanParam defaultValue: true, description: 'Run nightly build for getmarcapi',                name: "BUILD_getmarcapi"
       booleanParam defaultValue: false, description: 'Deploy to Devpi server for testing',             name: "DEPLOY_DEVPI"
+      booleanParam defaultValue: false, description: 'Include Mac builds in pipelines',                name: "INCLUDE_MAC"
 
     }
     stages{
@@ -159,7 +160,7 @@ pipeline {
                                     booleanParam(name: 'TEST_RUN_TOX', value: true),
                                     booleanParam(name: 'USE_SONARQUBE', value: true),
                                     booleanParam(name: 'BUILD_PACKAGES', value: true),
-                                    booleanParam(name: 'TEST_PACKAGES_ON_MAC', value: true),
+                                    booleanParam(name: 'TEST_PACKAGES_ON_MAC', value: params.INCLUDE_MAC),
                                     booleanParam(name: 'DEPLOY_DEVPI', value: params.DEPLOY_DEVPI),
                                     booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
                                     booleanParam(name: 'DEPLOY_DOCS', value: false),
@@ -212,7 +213,7 @@ pipeline {
                                     booleanParam(name: 'RUN_MEMCHECK', value: true),
                                     booleanParam(name: 'USE_SONARQUBE', value: true),
                                     booleanParam(name: 'DEPLOY_DEVPI', value: params.DEPLOY_DEVPI),
-                                    booleanParam(name: 'BUILD_MAC_PACKAGES', value: true),
+                                    booleanParam(name: 'BUILD_MAC_PACKAGES', value: params.INCLUDE_MAC),
                                     booleanParam(name: 'INCLUDE_ARM', value: true),
                                     booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
                                     string(name: 'URL_SUBFOLDER', value: 'py3exiv2bind'),
@@ -260,7 +261,7 @@ pipeline {
                                     string(name: 'PROJECT_NAME', value: 'Hathi Validate'),
                                     booleanParam(name: 'TEST_RUN_TOX', value: true),
                                     booleanParam(name: 'BUILD_PACKAGES', value: true),
-                                    booleanParam(name: 'TEST_PACKAGES_ON_MAC', value: true),
+                                    booleanParam(name: 'TEST_PACKAGES_ON_MAC', value: params.INCLUDE_MAC),
                                     booleanParam(name: 'DEPLOY_DEVPI', value: params.DEPLOY_DEVPI),
                                     booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
                                     booleanParam(name: 'DEPLOY_ADD_TAG', value: false),
@@ -315,7 +316,7 @@ pipeline {
                                     booleanParam(name: 'PACKAGE_WINDOWS_STANDALONE_NSIS', value: true),
                                     booleanParam(name: 'PACKAGE_WINDOWS_STANDALONE_ZIP', value: true),
                                     booleanParam(name: 'PACKAGE_MAC_OS_STANDALONE_DMG', value: true),
-                                    booleanParam(name: 'TEST_PACKAGES_ON_MAC', value: true),
+                                    booleanParam(name: 'TEST_PACKAGES_ON_MAC', value: params.INCLUDE_MAC),
                                     booleanParam(name: 'BUILD_CHOCOLATEY_PACKAGE', value: true),
                                     booleanParam(name: 'DEPLOY_DEVPI', value: params.DEPLOY_DEVPI),
                                     booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
@@ -343,7 +344,7 @@ pipeline {
                                 parameters: [
                                     booleanParam(name: 'TEST_RUN_TOX', value: true),
                                     booleanParam(name: 'BUILD_PACKAGES', value: true),
-                                    booleanParam(name: 'TEST_PACKAGES_ON_MAC', value: true),
+                                    booleanParam(name: 'TEST_PACKAGES_ON_MAC', value: params.INCLUDE_MAC),
                                     booleanParam(name: 'BUILD_CHOCOLATEY_PACKAGE', value: true),
                                     booleanParam(name: 'DEPLOY_DEVPI', value: params.DEPLOY_DEVPI),
                                     booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false)
@@ -369,7 +370,7 @@ pipeline {
                                     booleanParam(name: 'USE_SONARQUBE', value: true),
                                     booleanParam(name: 'BUILD_PACKAGES', value: true),
                                     booleanParam(name: 'INCLUDE_ARM', value: true),
-                                    booleanParam(name: 'BUILD_MAC_PACKAGES', value: true),
+                                    booleanParam(name: 'BUILD_MAC_PACKAGES', value: params.INCLUDE_MAC),
                                     booleanParam(name: 'TEST_PACKAGES', value: true),
                                     booleanParam(name: 'BUILD_MANYLINUX_PACKAGES', value: true),
                                     booleanParam(name: 'DEPLOY_DEVPI', value: params.DEPLOY_DEVPI),
