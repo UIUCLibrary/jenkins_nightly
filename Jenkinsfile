@@ -5,6 +5,7 @@ pipeline {
     }
     options {
       disableConcurrentBuilds()
+      timeout(time: 1, unit: 'DAYS')
     }
     parameters {
       booleanParam defaultValue: false, description: 'Run nightly build for Tyko',                      name: "BUILD_Tyko"
@@ -20,8 +21,8 @@ pipeline {
       booleanParam defaultValue: true,  description: 'Run nightly build for PackageValidation',         name: "BUILD_PackageValidation"
       booleanParam defaultValue: true,  description: 'Run nightly build for speedwagon',                name: "BUILD_speedwagon"
       booleanParam defaultValue: true,  description: 'Run nightly build for getmarcapi',                name: "BUILD_getmarcapi"
-      booleanParam defaultValue: false, description: 'Deploy to Devpi server for testing',             name: "DEPLOY_DEVPI"
-      booleanParam defaultValue: false, description: 'Include Mac builds in pipelines',                name: "INCLUDE_MAC"
+      booleanParam defaultValue: false, description: 'Deploy to Devpi server for testing',              name: "DEPLOY_DEVPI"
+      booleanParam defaultValue: false, description: 'Include Mac builds in pipelines',                 name: "INCLUDE_MAC"
 
     }
     stages{
