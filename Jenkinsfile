@@ -21,8 +21,8 @@ pipeline {
       booleanParam defaultValue: true,  description: 'Run nightly build for PackageValidation',         name: "BUILD_PackageValidation"
       booleanParam defaultValue: true,  description: 'Run nightly build for speedwagon',                name: "BUILD_speedwagon"
       booleanParam defaultValue: true,  description: 'Run nightly build for getmarcapi',                name: "BUILD_getmarcapi"
-      booleanParam defaultValue: false, description: 'Deploy to Devpi server for testing',              name: "DEPLOY_DEVPI"
-      booleanParam defaultValue: false, description: 'Include Mac builds in pipelines',                 name: "INCLUDE_MAC"
+      booleanParam defaultValue: true,  description: 'Deploy to Devpi server for testing',              name: "DEPLOY_DEVPI"
+      booleanParam defaultValue: true,  description: 'Include Mac builds in pipelines',                 name: "INCLUDE_MAC"
 
     }
     stages{
@@ -372,8 +372,7 @@ pipeline {
                                     booleanParam(name: 'USE_SONARQUBE', value: true),
                                     booleanParam(name: 'BUILD_PACKAGES', value: true),
                                     booleanParam(name: 'INCLUDE_ARM', value: true),
-                                    booleanParam(name: 'BUILD_MAC_PACKAGES', value: true),
-//                                     booleanParam(name: 'BUILD_MAC_PACKAGES', value: params.INCLUDE_MAC),
+                                    booleanParam(name: 'BUILD_MAC_PACKAGES', value: params.INCLUDE_MAC),
                                     booleanParam(name: 'TEST_PACKAGES', value: true),
                                     booleanParam(name: 'BUILD_MANYLINUX_PACKAGES', value: true),
                                     booleanParam(name: 'DEPLOY_DEVPI', value: params.DEPLOY_DEVPI),
