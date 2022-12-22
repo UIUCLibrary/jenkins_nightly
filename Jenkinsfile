@@ -63,6 +63,7 @@ pipeline {
                                 parameters: [
                                     string(name: 'PROJECT_NAME', value: 'HathiTrust Zip for Submit'),
                                     booleanParam(name: 'TEST_RUN_TOX', value: true),
+                                    booleanParam(name: 'BUILD_PACKAGES', value: true),
                                     booleanParam(name: 'TEST_PACKAGES', value: true),
                                     booleanParam(name: 'TEST_PACKAGES_ON_MAC', value: params.INCLUDE_MAC),
                                     booleanParam(name: 'PACKAGE_CX_FREEZE', value: true),
