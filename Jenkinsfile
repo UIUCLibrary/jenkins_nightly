@@ -77,6 +77,23 @@ pipeline {
                         }
                     }
                 }
+                stage("uiucprescon.build"){
+                    options {
+                        warnError('uiucprescon.build Build failed')
+                    }
+                    when{
+                        equals expected: true, actual: params.BUILD_UIUCPRESCON_BUILD
+                    }
+                    steps{
+                        retry(2){
+                            build(
+                                job: 'OpenSourceProjects/uiucprescon.build/main',
+                                parameters: [
+                                ]
+                            )
+                        }
+                    }
+                }
                 stage("pyhathiprep"){
                     options {
                         warnError('pyhathiprep Build failed')
