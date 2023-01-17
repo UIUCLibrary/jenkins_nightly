@@ -14,6 +14,7 @@ pipeline {
       booleanParam defaultValue: true,  description: 'Run nightly build for uiucprescon.images',        name: "BUILD_uiucprescon_images"
       booleanParam defaultValue: true,  description: 'Run nightly build for uiucprescon.packager',      name: "BUILD_uiucprescon_packager"
       booleanParam defaultValue: true,  description: 'Run nightly build for uiucprescon.imagevalidate', name: "BUILD_uiucprescon_imagevalidate"
+      booleanParam defaultValue: true,  description: 'Run nightly build for uiucprescon.build', name: "BUILD_UIUCPRESCON_BUILD"
       booleanParam defaultValue: true,  description: 'Run nightly build for pyexiv2bind2',              name: "BUILD_pyexiv2bind2"
       booleanParam defaultValue: true,  description: 'Run nightly build for uiucprescon.getmarc2',      name: "BUILD_uiucprescon_getalmarc2"
       booleanParam defaultValue: true,  description: 'Run nightly build for uiucprescon.ocr',           name: "BUILD_uiucprescon_ocr"
