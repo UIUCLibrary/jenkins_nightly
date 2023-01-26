@@ -119,30 +119,6 @@ pipeline {
                         }
                     }
                 }
-//                 stage("HT_checksum_update"){
-//                     options {
-//                         warnError('HT_checksum_update Build failed')
-//                     }
-//                     when{
-//                         equals expected: true, actual: params.BUILD_HT_checksum_update
-//                     }
-//                     steps{
-//                         build(
-//                             job: 'OpenSourceProjects/HT_checksum_update/master',
-//                             parameters: [
-//                                 string(name: 'PROJECT_NAME', value: 'HathiTrust Checksum Updater'),
-//                                 booleanParam(name: 'RUN_CHECKS', value: true),
-//                                 booleanParam(name: 'TEST_RUN_TOX', value: true),
-//                                 booleanParam(name: 'PACKAGE_CX_FREEZE', value: true),
-//                                 booleanParam(name: 'DEPLOY_SCCM', value: false),
-//                                 booleanParam(name: 'DEPLOY_DEVPI', value: true),
-//                                 booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
-//                                 booleanParam(name: 'UPDATE_DOCS', value: false),
-//                                 string(name: 'URL_SUBFOLDER', value: 'hathi_checksum_updater')
-//                             ]
-//                         )
-//                     }
-//                 }
                 stage("uiucprescon.images"){
                     options {
                         warnError('HT_checksum_update Build failed')
@@ -181,7 +157,9 @@ pipeline {
                                     booleanParam(name: 'TEST_RUN_TOX', value: true),
                                     booleanParam(name: 'USE_SONARQUBE', value: true),
                                     booleanParam(name: 'BUILD_PACKAGES', value: true),
-                                    booleanParam(name: 'TEST_PACKAGES_ON_MAC', value: params.INCLUDE_MAC),
+                                    booleanParam(name: 'INCLUDE_ARM_LINUX', value: true),
+                                    booleanParam(name: 'INCLUDE_ARM_MACOS', value: params.INCLUDE_MAC),
+                                    booleanParam(name: 'INCLUDE_X86_64_MACOS', value: params.INCLUDE_MAC),
                                     booleanParam(name: 'DEPLOY_DEVPI', value: params.DEPLOY_DEVPI),
                                     booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
                                     booleanParam(name: 'DEPLOY_DOCS', value: false),
