@@ -345,7 +345,9 @@ pipeline {
                                 parameters: [
                                     booleanParam(name: 'TEST_RUN_TOX', value: true),
                                     booleanParam(name: 'BUILD_PACKAGES', value: true),
-                                    booleanParam(name: 'TEST_PACKAGES_ON_MAC', value: params.INCLUDE_MAC),
+                                    booleanParam(name: 'INCLUDE_ARM_MACOS', value: params.INCLUDE_MAC),
+                                    booleanParam(name: 'INCLUDE_X86_64_MACOS', value: params.INCLUDE_MAC),
+                                    booleanParam(name: 'INCLUDE_ARM_LINUX', value: true),
                                     booleanParam(name: 'BUILD_CHOCOLATEY_PACKAGE', value: true),
                                     booleanParam(name: 'DEPLOY_DEVPI', value: params.DEPLOY_DEVPI),
                                     booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false)
