@@ -399,6 +399,7 @@ pipeline {
                                     booleanParam(name: 'TEST_RUN_TOX', value: true),
                                     booleanParam(name: 'USE_SONARQUBE', value: true),
                                     booleanParam(name: 'BUILD_PACKAGES', value: true),
+                                    booleanParam(name: 'INCLUDE_ARM_LINUX', value: true),
                                     booleanParam(name: 'DEPLOY_DEVPI', value: params.DEPLOY_DEVPI),
                                     booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
                                     booleanParam(name: 'DEPLOY_DOCS', value: false)
