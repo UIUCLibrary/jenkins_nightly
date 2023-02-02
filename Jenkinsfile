@@ -42,7 +42,7 @@ pipeline {
                             build(
                                 job: 'OpenSourceProjects/tyko/master',
                                   parameters: [
-                                    booleanParam(name: 'USE_SONARQUBE', value: param.USE_SONARQUBE),
+                                    booleanParam(name: 'USE_SONARQUBE', value: params.USE_SONARQUBE),
                                     booleanParam(name: 'TEST_RUN_TOX', value: true),
                                     booleanParam(name: 'DEPLOY_SERVER', value: false),
                                     booleanParam(name: 'DEPLOY_DOCS', value: false)
@@ -67,7 +67,7 @@ pipeline {
                                     booleanParam(name: 'TEST_RUN_TOX', value: true),
                                     booleanParam(name: 'BUILD_PACKAGES', value: true),
                                     booleanParam(name: 'TEST_PACKAGES', value: true),
-                                    booleanParam(name: 'USE_SONARQUBE', value: param.USE_SONARQUBE),
+                                    booleanParam(name: 'USE_SONARQUBE', value: params.USE_SONARQUBE),
                                     booleanParam(name: 'TEST_PACKAGES_ON_MAC', value: params.INCLUDE_MAC),
                                     booleanParam(name: 'PACKAGE_CX_FREEZE', value: true),
                                     booleanParam(name: 'INCLUDE_ARM', value: true),
@@ -114,7 +114,7 @@ pipeline {
                                     booleanParam(name: 'DEPLOY_DEVPI', value: params.DEPLOY_DEVPI),
                                     booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
                                     string(name: 'URL_SUBFOLDER', value: 'pyhathiprep'),
-                                    booleanParam(name: 'USE_SONARQUBE', value: param.USE_SONARQUBE),
+                                    booleanParam(name: 'USE_SONARQUBE', value: params.USE_SONARQUBE),
                                     booleanParam(name: 'DEPLOY_DOCS', value: false),
                                     booleanParam(name: 'DEPLOY_ADD_TAG', value: false)
                                 ]
@@ -135,7 +135,7 @@ pipeline {
                                 job: 'OpenSourceProjects/imageprocess/master',
                                 parameters: [
                                     booleanParam(name: 'TEST_RUN_TOX', value: true),
-                                    booleanParam(name: 'USE_SONARQUBE', value: param.USE_SONARQUBE),
+                                    booleanParam(name: 'USE_SONARQUBE', value: params.USE_SONARQUBE),
                                     booleanParam(name: 'DEPLOY_DEVPI', value: params.DEPLOY_DEVPI),
                                     booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
                                     booleanParam(name: 'DEPLOY_ADD_TAG', value: false),
@@ -159,7 +159,7 @@ pipeline {
                                 parameters: [
                                     booleanParam(name: 'RUN_CHECKS', value: true),
                                     booleanParam(name: 'TEST_RUN_TOX', value: true),
-                                    booleanParam(name: 'USE_SONARQUBE', value: param.USE_SONARQUBE),
+                                    booleanParam(name: 'USE_SONARQUBE', value: params.USE_SONARQUBE),
                                     booleanParam(name: 'BUILD_PACKAGES', value: true),
                                     booleanParam(name: 'INCLUDE_ARM_LINUX', value: true),
                                     booleanParam(name: 'INCLUDE_ARM_MACOS', value: params.INCLUDE_MAC),
@@ -189,7 +189,7 @@ pipeline {
                                     booleanParam(name: 'TEST_RUN_TOX', value: true),
                                     booleanParam(name: 'BUILD_PACKAGES', value: true),
                                     booleanParam(name: 'TEST_PACKAGES', value: true),
-                                    booleanParam(name: 'USE_SONARQUBE', value: param.USE_SONARQUBE),
+                                    booleanParam(name: 'USE_SONARQUBE', value: params.USE_SONARQUBE),
                                     booleanParam(name: 'INCLUDE_ARM_MACOS', value: params.INCLUDE_MAC),
                                     booleanParam(name: 'INCLUDE_X86_64_MACOS', value: params.INCLUDE_MAC),
                                     booleanParam(name: 'INCLUDE_ARM_LINUX', value: true),
@@ -216,7 +216,7 @@ pipeline {
                                 parameters: [
                                     booleanParam(name: 'TEST_RUN_TOX', value: true),
                                     booleanParam(name: 'RUN_MEMCHECK', value: true),
-                                    booleanParam(name: 'USE_SONARQUBE', value: param.USE_SONARQUBE),
+                                    booleanParam(name: 'USE_SONARQUBE', value: params.USE_SONARQUBE),
                                     booleanParam(name: 'DEPLOY_DEVPI', value: params.DEPLOY_DEVPI),
                                     booleanParam(name: 'INCLUDE_MACOS_ARM', value: params.INCLUDE_MAC),
                                     booleanParam(name: 'INCLUDE_MACOS_X86_64', value: params.INCLUDE_MAC),
@@ -269,7 +269,7 @@ pipeline {
                                     string(name: 'PROJECT_NAME', value: 'Hathi Validate'),
                                     booleanParam(name: 'TEST_RUN_TOX', value: true),
                                     booleanParam(name: 'BUILD_PACKAGES', value: true),
-                                    booleanParam(name: 'USE_SONARQUBE', value: param.USE_SONARQUBE),
+                                    booleanParam(name: 'USE_SONARQUBE', value: params.USE_SONARQUBE),
                                     booleanParam(name: 'TEST_PACKAGES_ON_MAC', value: params.INCLUDE_MAC),
                                     booleanParam(name: 'DEPLOY_DEVPI', value: params.DEPLOY_DEVPI),
                                     booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
@@ -320,7 +320,7 @@ pipeline {
                                 parameters: [
                                     string(name: 'JIRA_ISSUE_VALUE', value: 'PSR-83'),
                                     booleanParam(name: 'TEST_RUN_TOX', value: true),
-                                    booleanParam(name: 'USE_SONARQUBE', value: param.USE_SONARQUBE),
+                                    booleanParam(name: 'USE_SONARQUBE', value: params.USE_SONARQUBE),
                                     booleanParam(name: 'PACKAGE_WINDOWS_STANDALONE_MSI', value: true),
                                     booleanParam(name: 'PACKAGE_WINDOWS_STANDALONE_NSIS', value: true),
                                     booleanParam(name: 'PACKAGE_WINDOWS_STANDALONE_ZIP', value: true),
@@ -354,7 +354,7 @@ pipeline {
                                 parameters: [
                                     booleanParam(name: 'TEST_RUN_TOX', value: true),
                                     booleanParam(name: 'BUILD_PACKAGES', value: true),
-                                    booleanParam(name: 'USE_SONARQUBE', value: param.USE_SONARQUBE),
+                                    booleanParam(name: 'USE_SONARQUBE', value: params.USE_SONARQUBE),
                                     booleanParam(name: 'INCLUDE_ARM_MACOS', value: params.INCLUDE_MAC),
                                     booleanParam(name: 'INCLUDE_X86_64_MACOS', value: params.INCLUDE_MAC),
                                     booleanParam(name: 'INCLUDE_ARM_LINUX', value: true),
@@ -380,7 +380,7 @@ pipeline {
                                 parameters: [
                                     booleanParam(name: 'RUN_CHECKS', value: true),
                                     booleanParam(name: 'TEST_RUN_TOX', value: true),
-                                    booleanParam(name: 'USE_SONARQUBE', value: param.USE_SONARQUBE),
+                                    booleanParam(name: 'USE_SONARQUBE', value: params.USE_SONARQUBE),
                                     booleanParam(name: 'BUILD_PACKAGES', value: true),
                                     booleanParam(name: 'INCLUDE_MACOS_ARM', value: params.INCLUDE_MAC),
                                     booleanParam(name: 'INCLUDE_MACOS_X86_64', value: params.INCLUDE_MAC),
@@ -410,7 +410,7 @@ pipeline {
                                 job: 'OpenSourceProjects/getmarcapi/master',
                                 parameters: [
                                     booleanParam(name: 'TEST_RUN_TOX', value: true),
-                                    booleanParam(name: 'USE_SONARQUBE', value: param.USE_SONARQUBE),
+                                    booleanParam(name: 'USE_SONARQUBE', value: params.USE_SONARQUBE),
                                     booleanParam(name: 'BUILD_PACKAGES', value: true),
                                     booleanParam(name: 'INCLUDE_ARM_LINUX', value: true),
                                     booleanParam(name: 'DEPLOY_DEVPI', value: params.DEPLOY_DEVPI),
