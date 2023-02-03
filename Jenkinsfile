@@ -196,7 +196,6 @@ pipeline {
                                     booleanParam(name: 'DEPLOY_DEVPI', value: params.DEPLOY_DEVPI),
                                     booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
                                     booleanParam(name: 'DEPLOY_DOCS', value: false),
-                                    string(name: 'DEPLOY_DOCS_URL_SUBFOLDER', value: 'imagevalidate')
                                 ]
                             )
                         }
