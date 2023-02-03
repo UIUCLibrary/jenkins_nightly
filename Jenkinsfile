@@ -116,7 +116,6 @@ pipeline {
                                     string(name: 'URL_SUBFOLDER', value: 'pyhathiprep'),
                                     booleanParam(name: 'USE_SONARQUBE', value: params.USE_SONARQUBE),
                                     booleanParam(name: 'DEPLOY_DOCS', value: false),
-                                    booleanParam(name: 'DEPLOY_ADD_TAG', value: false)
                                 ]
                             )
                         }
@@ -138,7 +137,6 @@ pipeline {
                                     booleanParam(name: 'USE_SONARQUBE', value: params.USE_SONARQUBE),
                                     booleanParam(name: 'DEPLOY_DEVPI', value: params.DEPLOY_DEVPI),
                                     booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
-                                    booleanParam(name: 'DEPLOY_ADD_TAG', value: false),
                                     booleanParam(name: 'DEPLOY_DOCS', value: false)
                                 ]
                             )
@@ -272,7 +270,6 @@ pipeline {
                                     booleanParam(name: 'TEST_PACKAGES_ON_MAC', value: params.INCLUDE_MAC),
                                     booleanParam(name: 'DEPLOY_DEVPI', value: params.DEPLOY_DEVPI),
                                     booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
-                                    booleanParam(name: 'DEPLOY_ADD_TAG', value: false),
                                     booleanParam(name: 'DEPLOY_HATHI_TOOL_BETA', value: false),
                                     booleanParam(name: 'DEPLOY_DOCS', value: false),
                                     string(name: 'URL_SUBFOLDER', value: 'hathi_validate')
@@ -295,7 +292,6 @@ pipeline {
                                 job: 'OpenSourceProjects/PackageValidation/master',
                                 parameters: [
                                     booleanParam(name: 'TEST_RUN_TOX', value: true),
-                                    booleanParam(name: 'PACKAGE_CX_FREEZE', value: true),
                                     booleanParam(name: 'DEPLOY_DEVPI', value: params.DEPLOY_DEVPI),
                                     booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
                                     booleanParam(name: 'UPDATE_DOCS', value: false),
