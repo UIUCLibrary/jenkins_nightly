@@ -388,7 +388,6 @@ pipeline {
                                     booleanParam(name: 'INCLUDE_LINUX_X86_64', value: true),
                                     booleanParam(name: 'INCLUDE_WINDOWS_X86_64', value: true),
                                     booleanParam(name: 'TEST_PACKAGES', value: true),
-                                    booleanParam(name: 'BUILD_MANYLINUX_PACKAGES', value: true),
                                     booleanParam(name: 'DEPLOY_DEVPI', value: params.DEPLOY_DEVPI),
                                     booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
                                     booleanParam(name: 'DEPLOY_DOCS', value: false)
