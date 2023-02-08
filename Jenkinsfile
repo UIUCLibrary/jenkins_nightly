@@ -313,26 +313,30 @@ pipeline {
                             build(
                                 job: 'OpenSourceProjects/Speedwagon/master',
                                 parameters: [
-                                    string(name: 'JIRA_ISSUE_VALUE', value: 'PSR-83'),
-                                    booleanParam(name: 'TEST_RUN_TOX', value: true),
                                     booleanParam(name: 'USE_SONARQUBE', value: params.USE_SONARQUBE),
-                                    booleanParam(name: 'PACKAGE_WINDOWS_STANDALONE_MSI', value: true),
-                                    booleanParam(name: 'PACKAGE_WINDOWS_STANDALONE_NSIS', value: true),
-                                    booleanParam(name: 'PACKAGE_WINDOWS_STANDALONE_ZIP', value: true),
-                                    booleanParam(name: 'DEPLOY_DMG', value: false),
-                                    booleanParam(name: 'PACKAGE_MAC_OS_STANDALONE_DMG', value: params.INCLUDE_MAC),
+                                    booleanParam(name: 'RUN_CHECKS', value: true),
+                                    booleanParam(name: 'TEST_RUN_TOX', value: true),
+                                    booleanParam(name: 'BUILD_PACKAGES', value: true),
+                                    booleanParam(name: 'TEST_STANDALONE_PACKAGE_DEPLOYMENT', value: true),
+                                    booleanParam(name: 'BUILD_CHOCOLATEY_PACKAGE', value: true),
                                     booleanParam(name: 'INCLUDE_LINUX_ARM', value: true),
                                     booleanParam(name: 'INCLUDE_LINUX_X86_64', value: true),
                                     booleanParam(name: 'INCLUDE_MACOS_ARM', value: params.INCLUDE_MAC),
                                     booleanParam(name: 'INCLUDE_MACOS_X86_64', value: params.INCLUDE_MAC),
                                     booleanParam(name: 'INCLUDE_WINDOWS_X86_64', value: true),
+                                    booleanParam(name: 'TEST_PACKAGES', value: true),
+                                    booleanParam(name: 'PACKAGE_MAC_OS_STANDALONE_DMG', value: params.INCLUDE_MAC),
+                                    booleanParam(name: 'PACKAGE_WINDOWS_STANDALONE_MSI', value: true),
+                                    booleanParam(name: 'PACKAGE_WINDOWS_STANDALONE_NSIS', value: true),
+                                    booleanParam(name: 'PACKAGE_WINDOWS_STANDALONE_ZIP', value: true),
                                     booleanParam(name: 'DEPLOY_DEVPI', value: params.DEPLOY_DEVPI),
                                     booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
+                                    booleanParam(name: 'DEPLOY_PYPI', value: false),
                                     booleanParam(name: 'DEPLOY_CHOLOCATEY', value: false),
+                                    booleanParam(name: 'DEPLOY_DMG', value: false),
                                     booleanParam(name: 'DEPLOY_HATHI_TOOL_BETA', value: false),
                                     booleanParam(name: 'DEPLOY_SCCM', value: false),
                                     booleanParam(name: 'DEPLOY_DOCS', value: false),
-                                    string(name: 'DEPLOY_DOCS_URL_SUBFOLDER', value: 'speedwagon')
                                 ]
                             )
                         }
