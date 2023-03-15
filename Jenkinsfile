@@ -67,13 +67,14 @@ pipeline {
                                     booleanParam(name: 'TEST_RUN_TOX', value: true),
                                     booleanParam(name: 'BUILD_PACKAGES', value: true),
                                     booleanParam(name: 'TEST_PACKAGES', value: true),
+                                    booleanParam(name: 'INCLUDE_LINUX_ARM', value: true),
+                                    booleanParam(name: 'INCLUDE_LINUX_X86_64', value: true),
+                                    booleanParam(name: 'INCLUDE_MACOS_ARM', value: params.INCLUDE_MAC),
+                                    booleanParam(name: 'INCLUDE_MACOS_ARM', value: params.INCLUDE_MAC),
+                                    booleanParam(name: 'INCLUDE_WINDOWS_X86_64', true),
                                     booleanParam(name: 'USE_SONARQUBE', value: params.USE_SONARQUBE),
-                                    booleanParam(name: 'TEST_PACKAGES_ON_MAC', value: params.INCLUDE_MAC),
-                                    booleanParam(name: 'PACKAGE_CX_FREEZE', value: true),
-                                    booleanParam(name: 'INCLUDE_ARM', value: true),
                                     booleanParam(name: 'DEPLOY_DEVPI', value: params.DEPLOY_DEVPI),
                                     booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
-                                    booleanParam(name: 'DEPLOY_SCCM', value: false),
                                     booleanParam(name: 'UPDATE_DOCS', value: false)
                                 ]
                             )
@@ -332,9 +333,7 @@ pipeline {
                                     booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
                                     booleanParam(name: 'DEPLOY_PYPI', value: false),
                                     booleanParam(name: 'DEPLOY_CHOLOCATEY', value: false),
-                                    booleanParam(name: 'DEPLOY_DMG', value: false),
-                                    booleanParam(name: 'DEPLOY_HATHI_TOOL_BETA', value: false),
-                                    booleanParam(name: 'DEPLOY_SCCM', value: false),
+                                    booleanParam(name: 'DEPLOY_STANDALONE_PACKAGERS', value: false),
                                     booleanParam(name: 'DEPLOY_DOCS', value: false),
                                 ]
                             )
