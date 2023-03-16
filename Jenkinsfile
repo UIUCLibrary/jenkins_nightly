@@ -22,8 +22,9 @@ pipeline {
       booleanParam defaultValue: true,  description: 'Run nightly build for PackageValidation',         name: "BUILD_PackageValidation"
       booleanParam defaultValue: true,  description: 'Run nightly build for speedwagon',                name: "BUILD_speedwagon"
       booleanParam defaultValue: true,  description: 'Run nightly build for getmarcapi',                name: "BUILD_getmarcapi"
-      booleanParam defaultValue: false,  description: 'Deploy to Devpi server for testing',              name: "DEPLOY_DEVPI"
+      booleanParam defaultValue: false, description: 'Deploy to Devpi server for testing',              name: "DEPLOY_DEVPI"
       booleanParam defaultValue: true,  description: 'Include Mac builds in pipelines',                 name: "INCLUDE_MAC"
+      booleanParam defaultValue: false, description: 'Include Linux ARM builds in pipelines',           name: "INCLUDE_LINUX_ARM"
       booleanParam defaultValue: true,  description: 'Send test data to Sonarqube',                     name: "USE_SONARQUBE"
 
     }
@@ -67,7 +68,7 @@ pipeline {
                                     booleanParam(name: 'TEST_RUN_TOX', value: true),
                                     booleanParam(name: 'BUILD_PACKAGES', value: true),
                                     booleanParam(name: 'TEST_PACKAGES', value: true),
-                                    booleanParam(name: 'INCLUDE_LINUX_ARM', value: true),
+                                    booleanParam(name: 'INCLUDE_LINUX_ARM', value: param.INCLUDE_LINUX_ARM),
                                     booleanParam(name: 'INCLUDE_LINUX_X86_64', value: true),
                                     booleanParam(name: 'INCLUDE_MACOS_ARM', value: params.INCLUDE_MAC),
                                     booleanParam(name: 'INCLUDE_MACOS_ARM', value: params.INCLUDE_MAC),
@@ -116,7 +117,7 @@ pipeline {
                                     booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
                                     booleanParam(name: 'INCLUDE_MACOS_ARM', value: params.INCLUDE_MAC),
                                     booleanParam(name: 'INCLUDE_MACOS_X86_64', value: params.INCLUDE_MAC),
-                                    booleanParam(name: 'INCLUDE_LINUX_ARM', value: true),
+                                    booleanParam(name: 'INCLUDE_LINUX_ARM', value: param.INCLUDE_LINUX_ARM),
                                     booleanParam(name: 'INCLUDE_LINUX_X86_64', value: true),
                                     booleanParam(name: 'INCLUDE_WINDOWS_X86_64', value: true),
                                     string(name: 'URL_SUBFOLDER', value: 'pyhathiprep'),
@@ -165,7 +166,7 @@ pipeline {
                                     booleanParam(name: 'TEST_RUN_TOX', value: true),
                                     booleanParam(name: 'USE_SONARQUBE', value: params.USE_SONARQUBE),
                                     booleanParam(name: 'BUILD_PACKAGES', value: true),
-                                    booleanParam(name: 'INCLUDE_ARM_LINUX', value: true),
+                                    booleanParam(name: 'INCLUDE_ARM_LINUX', value: param.INCLUDE_LINUX_ARM),
                                     booleanParam(name: 'INCLUDE_ARM_MACOS', value: params.INCLUDE_MAC),
                                     booleanParam(name: 'INCLUDE_X86_64_MACOS', value: params.INCLUDE_MAC),
                                     booleanParam(name: 'DEPLOY_DEVPI', value: params.DEPLOY_DEVPI),
@@ -196,7 +197,7 @@ pipeline {
                                     booleanParam(name: 'USE_SONARQUBE', value: params.USE_SONARQUBE),
                                     booleanParam(name: 'INCLUDE_MACOS_ARM', value: params.INCLUDE_MAC),
                                     booleanParam(name: 'INCLUDE_MACOS_X86_64', value: params.INCLUDE_MAC),
-                                    booleanParam(name: 'INCLUDE_LINUX_ARM', value: true),
+                                    booleanParam(name: 'INCLUDE_LINUX_ARM', value: param.INCLUDE_LINUX_ARM),
                                     booleanParam(name: 'INCLUDE_LINUX_X86_64', value: true),
                                     booleanParam(name: 'INCLUDE_WINDOWS_X86_64', value: true),
                                     booleanParam(name: 'DEPLOY_DEVPI', value: params.DEPLOY_DEVPI),
@@ -225,7 +226,7 @@ pipeline {
                                     booleanParam(name: 'DEPLOY_DEVPI', value: params.DEPLOY_DEVPI),
                                     booleanParam(name: 'INCLUDE_MACOS_ARM', value: params.INCLUDE_MAC),
                                     booleanParam(name: 'INCLUDE_MACOS_X86_64', value: params.INCLUDE_MAC),
-                                    booleanParam(name: 'INCLUDE_LINUX_ARM', value: true),
+                                    booleanParam(name: 'INCLUDE_LINUX_ARM', value: param.INCLUDE_LINUX_ARM),
                                     booleanParam(name: 'INCLUDE_LINUX_X86_64', value: true),
                                     booleanParam(name: 'INCLUDE_WINDOWS_X86_64', value: true),
                                     booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
@@ -326,7 +327,7 @@ pipeline {
                                     booleanParam(name: 'BUILD_PACKAGES', value: true),
                                     booleanParam(name: 'TEST_STANDALONE_PACKAGE_DEPLOYMENT', value: true),
                                     booleanParam(name: 'BUILD_CHOCOLATEY_PACKAGE', value: true),
-                                    booleanParam(name: 'INCLUDE_LINUX_ARM', value: true),
+                                    booleanParam(name: 'INCLUDE_LINUX_ARM', value: param.INCLUDE_LINUX_ARM),
                                     booleanParam(name: 'INCLUDE_LINUX_X86_64', value: true),
                                     booleanParam(name: 'INCLUDE_MACOS_ARM', value: params.INCLUDE_MAC),
                                     booleanParam(name: 'INCLUDE_MACOS_X86_64', value: params.INCLUDE_MAC),
@@ -364,7 +365,7 @@ pipeline {
                                     booleanParam(name: 'USE_SONARQUBE', value: params.USE_SONARQUBE),
                                     booleanParam(name: 'INCLUDE_ARM_MACOS', value: params.INCLUDE_MAC),
                                     booleanParam(name: 'INCLUDE_X86_64_MACOS', value: params.INCLUDE_MAC),
-                                    booleanParam(name: 'INCLUDE_ARM_LINUX', value: true),
+                                    booleanParam(name: 'INCLUDE_ARM_LINUX', value: param.INCLUDE_LINUX_ARM),
                                     booleanParam(name: 'BUILD_CHOCOLATEY_PACKAGE', value: true),
                                     booleanParam(name: 'DEPLOY_DEVPI', value: params.DEPLOY_DEVPI),
                                     booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false)
@@ -391,7 +392,7 @@ pipeline {
                                     booleanParam(name: 'BUILD_PACKAGES', value: true),
                                     booleanParam(name: 'INCLUDE_MACOS_ARM', value: params.INCLUDE_MAC),
                                     booleanParam(name: 'INCLUDE_MACOS_X86_64', value: params.INCLUDE_MAC),
-                                    booleanParam(name: 'INCLUDE_LINUX_ARM', value: true),
+                                    booleanParam(name: 'INCLUDE_LINUX_ARM', value: param.INCLUDE_LINUX_ARM),
                                     booleanParam(name: 'INCLUDE_LINUX_X86_64', value: true),
                                     booleanParam(name: 'INCLUDE_WINDOWS_X86_64', value: true),
                                     booleanParam(name: 'TEST_PACKAGES', value: true),
@@ -418,7 +419,7 @@ pipeline {
                                     booleanParam(name: 'TEST_RUN_TOX', value: true),
                                     booleanParam(name: 'USE_SONARQUBE', value: params.USE_SONARQUBE),
                                     booleanParam(name: 'BUILD_PACKAGES', value: true),
-                                    booleanParam(name: 'INCLUDE_ARM_LINUX', value: true),
+                                    booleanParam(name: 'INCLUDE_ARM_LINUX', value: param.INCLUDE_LINUX_ARM),
                                     booleanParam(name: 'DEPLOY_DEVPI', value: params.DEPLOY_DEVPI),
                                     booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
                                     booleanParam(name: 'DEPLOY_DOCS', value: false)
