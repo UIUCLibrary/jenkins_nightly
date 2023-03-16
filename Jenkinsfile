@@ -300,6 +300,8 @@ pipeline {
                                 job: 'OpenSourceProjects/PackageValidation/master',
                                 parameters: [
                                     booleanParam(name: 'TEST_RUN_TOX', value: true),
+                                    booleanParam(name: 'BUILD_PACKAGES', value: true),
+                                    booleanParam(name: 'TEST_PACKAGES', value: true),
                                     booleanParam(name: 'DEPLOY_DEVPI', value: params.DEPLOY_DEVPI),
                                     booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
                                     booleanParam(name: 'UPDATE_DOCS', value: false),
