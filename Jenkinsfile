@@ -72,7 +72,7 @@ pipeline {
                                     booleanParam(name: 'INCLUDE_LINUX_X86_64', value: true),
                                     booleanParam(name: 'INCLUDE_MACOS_ARM', value: params.INCLUDE_MAC),
                                     booleanParam(name: 'INCLUDE_MACOS_ARM', value: params.INCLUDE_MAC),
-                                    booleanParam(name: 'INCLUDE_WINDOWS_X86_64', true),
+                                    booleanParam(name: 'INCLUDE_WINDOWS_X86_64', value: true),
                                     booleanParam(name: 'USE_SONARQUBE', value: params.USE_SONARQUBE),
                                     booleanParam(name: 'DEPLOY_DEVPI', value: params.DEPLOY_DEVPI),
                                     booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
