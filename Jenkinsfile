@@ -75,8 +75,7 @@ pipeline {
                                     booleanParam(name: 'INCLUDE_WINDOWS_X86_64', value: true),
                                     booleanParam(name: 'USE_SONARQUBE', value: params.USE_SONARQUBE),
                                     booleanParam(name: 'DEPLOY_DEVPI', value: params.DEPLOY_DEVPI),
-                                    booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
-                                    booleanParam(name: 'UPDATE_DOCS', value: false)
+                                    booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false)
                                 ]
                             )
                         }
@@ -279,8 +278,7 @@ pipeline {
                                     booleanParam(name: 'DEPLOY_DEVPI', value: params.DEPLOY_DEVPI),
                                     booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
                                     booleanParam(name: 'DEPLOY_HATHI_TOOL_BETA', value: false),
-                                    booleanParam(name: 'DEPLOY_DOCS', value: false),
-                                    string(name: 'URL_SUBFOLDER', value: 'hathi_validate')
+                                    booleanParam(name: 'DEPLOY_DOCS', value: false)
                                 ]
                             )
                         }
@@ -303,9 +301,7 @@ pipeline {
                                     booleanParam(name: 'BUILD_PACKAGES', value: true),
                                     booleanParam(name: 'TEST_PACKAGES', value: true),
                                     booleanParam(name: 'DEPLOY_DEVPI', value: params.DEPLOY_DEVPI),
-                                    booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
-                                    booleanParam(name: 'UPDATE_DOCS', value: false),
-                                    string(name: 'URL_SUBFOLDER', value: 'package_qc')
+                                    booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false)
                                 ]
                             )
                         }
