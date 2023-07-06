@@ -22,7 +22,7 @@ pipeline {
       booleanParam defaultValue: true,  description: 'Run nightly build for PackageValidation',         name: "BUILD_PackageValidation"
       booleanParam defaultValue: true,  description: 'Run nightly build for speedwagon',                name: "BUILD_speedwagon"
       booleanParam defaultValue: true,  description: 'Run nightly build for getmarcapi',                name: "BUILD_getmarcapi"
-      booleanParam defaultValue: false, description: 'Deploy to Devpi server for testing',              name: "DEPLOY_DEVPI"
+      booleanParam defaultValue: true,  description: 'Deploy to Devpi server for testing',              name: "DEPLOY_DEVPI"
       booleanParam defaultValue: true,  description: 'Include Mac builds in pipelines',                 name: "INCLUDE_MAC"
       booleanParam defaultValue: true,  description: 'Include Linux ARM builds in pipelines',           name: "INCLUDE_LINUX_ARM"
       booleanParam defaultValue: true,  description: 'Send test data to Sonarqube',                     name: "USE_SONARQUBE"
