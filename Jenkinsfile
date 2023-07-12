@@ -338,7 +338,7 @@ pipeline {
                                     booleanParam(name: 'DEPLOY_DEVPI', value: params.DEPLOY_DEVPI),
                                     booleanParam(name: 'DEPLOY_DEVPI_PRODUCTION', value: false),
                                     booleanParam(name: 'DEPLOY_PYPI', value: false),
-                                    booleanParam(name: 'DEPLOY_CHOLOCATEY', value: false),
+                                    booleanParam(name: 'DEPLOY_CHOCOLATEY', value: false),
                                     booleanParam(name: 'DEPLOY_STANDALONE_PACKAGERS', value: false),
                                     booleanParam(name: 'DEPLOY_DOCS', value: false),
                                 ]
