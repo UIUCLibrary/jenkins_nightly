@@ -1,10 +1,10 @@
 
-isTriggeredByTimer = !currentBuild.getBuildCauses('hudson.triggers.TimerTrigger$TimerTriggerCause').isEmpty()
-isTriggeredByUser = !currentBuild.getBuildCauses('hudson.model.Cause$UserIdCause').isEmpty()
+def isTriggeredByTimer = !currentBuild.getBuildCauses('hudson.triggers.TimerTrigger$TimerTriggerCause').isEmpty()
+def isTriggeredByUser = !currentBuild.getBuildCauses('hudson.model.Cause$UserIdCause').isEmpty()
 
-armMacIsAvailable = nodesByLabel('mac && arm64').size() > 0
-x86_64MacIsAvailable = nodesByLabel('mac && x86_64').size() > 0
-x86_64WindowsIsAvailable = nodesByLabel('windows && x86_64').size() > 0
+def armMacIsAvailable = nodesByLabel('mac && arm64').size() > 0
+def x86_64MacIsAvailable = nodesByLabel('mac && x86_64').size() > 0
+def x86_64WindowsIsAvailable = nodesByLabel('windows && x86_64').size() > 0
 
 def shouldIBuildForWindows(params){
     (params.INCLUDE_WINDOWS_X86_64 && isTriggeredByUser) || (isTriggeredByTimer && x86_64WindowsIsAvailable)
@@ -51,7 +51,7 @@ pipeline {
             }
             steps{
                 build(
-                    job: 'open source/Homebrew tap for uiuclibrary uiucprescon/master',
+                    job: 'package managers/Homebrew tap for uiuclibrary uiucprescon/master',
                     parameters: [
                         booleanParam(name: 'AUDIT_FORMULA', value: true),
                         booleanParam(name: 'AUDIT_FORMULA_ONLINE_OPTION', value: true),
