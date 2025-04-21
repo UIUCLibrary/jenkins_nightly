@@ -1,14 +1,27 @@
-
-def isTriggeredByTimer = !currentBuild.getBuildCauses('hudson.triggers.TimerTrigger$TimerTriggerCause').isEmpty()
-def isTriggeredByUser = !currentBuild.getBuildCauses('hudson.model.Cause$UserIdCause').isEmpty()
-
-def armMacIsAvailable = nodesByLabel('mac && arm64').size() > 0
-def x86_64MacIsAvailable = nodesByLabel('mac && x86_64').size() > 0
-def x86_64WindowsIsAvailable = nodesByLabel('windows && x86_64').size() > 0
-
 def shouldIBuildForWindows(params){
-    (params.INCLUDE_WINDOWS_X86_64 && isTriggeredByUser) || (isTriggeredByTimer && x86_64WindowsIsAvailable)
+    def isTriggeredByTimer = !currentBuild.getBuildCauses('hudson.triggers.TimerTrigger$TimerTriggerCause').isEmpty()
+    def isThisBuildTriggeredByUser = !currentBuild.getBuildCauses('hudson.model.Cause$UserIdCause').isEmpty()
+    def thisArchiIsAvailable = nodesByLabel('windows && x86_64').size() > 0
+    return (params.INCLUDE_WINDOWS_X86_64 && isThisBuildTriggeredByUser) || (isTriggeredByTimer && thisArchiIsAvailable)
 }
+
+def shouldIBuildForMacX86_64(params){
+    def thisArchIsAvailable = nodesByLabel('mac && x86_64').size() > 0
+    def isTriggeredByTimer = !currentBuild.getBuildCauses('hudson.triggers.TimerTrigger$TimerTriggerCause').isEmpty()
+    def isThisBuildTriggeredByUser = !currentBuild.getBuildCauses('hudson.model.Cause$UserIdCause').isEmpty()
+    return (params.INCLUDE_MAC && isThisBuildTriggeredByUser) || (thisArchIsAvailable && isTriggeredByTimer)
+}
+
+
+def shouldIBuildForMacARM64(params){
+    def isThisBuildTriggeredByUser = !currentBuild.getBuildCauses('hudson.model.Cause$UserIdCause').isEmpty()
+    def thisArchiIsAvailable = nodesByLabel('mac && arm64').size() > 0
+    def isTriggeredByTimer = !currentBuild.getBuildCauses('hudson.triggers.TimerTrigger$TimerTriggerCause').isEmpty()
+    return (params.INCLUDE_MAC && isThisBuildTriggeredByUser) || (thisArchiIsAvailable && isTriggeredByTimer)
+
+}
+
+
 
 pipeline {
     agent none
@@ -107,12 +120,12 @@ pipeline {
                                 booleanParam(name: 'TEST_PACKAGES', value: true),
                                 booleanParam(name: 'INCLUDE_LINUX-X86_64', value: true),
                                 booleanParam(name: 'INCLUDE_LINUX-ARM64', value: true),
-                                booleanParam(name: 'INCLUDE_MACOS-X86_64', value: (params.INCLUDE_MAC && isTriggeredByUser) || (x86_64MacIsAvailable && isTriggeredByTimer)),
-                                booleanParam(name: 'INCLUDE_MACOS-ARM64', value: (params.INCLUDE_MAC && isTriggeredByUser) || (armMacIsAvailable && isTriggeredByTimer)),
+                                booleanParam(name: 'INCLUDE_MACOS-X86_64', value: shouldIBuildForMacX86_64(params)),
+                                booleanParam(name: 'INCLUDE_MACOS-ARM64', value: shouldIBuildForMacARM64(params)),
                                 booleanParam(name: 'INCLUDE_WINDOWS-X86_64', value: shouldIBuildForWindows(params)),
                                 booleanParam(name: 'USE_SONARQUBE', value: params.USE_SONARQUBE),
-                                booleanParam(name: 'PACKAGE_MAC_OS_STANDALONE_X86_64', value: (params.INCLUDE_MAC && isTriggeredByUser) || (x86_64MacIsAvailable && isTriggeredByTimer)),
-                                booleanParam(name: 'PACKAGE_MAC_OS_STANDALONE_ARM64', value: (params.INCLUDE_MAC && isTriggeredByUser) || (armMacIsAvailable && isTriggeredByTimer)),
+                                booleanParam(name: 'PACKAGE_MAC_OS_STANDALONE_X86_64', value: shouldIBuildForMacX86_64(params)),
+                                booleanParam(name: 'PACKAGE_MAC_OS_STANDALONE_ARM64', value: shouldIBuildForMacARM64(params)),
                                 booleanParam(name: 'PACKAGE_STANDALONE_WINDOWS_INSTALLER', value: shouldIBuildForWindows(params)),
                                 booleanParam(name: 'DEPLOY_STANDALONE_PACKAGERS', value: false),
                                 
@@ -137,13 +150,13 @@ pipeline {
                                 booleanParam(name: 'TEST_PACKAGES', value: true),
                                 booleanParam(name: 'INCLUDE_LINUX-X86_64', value: true),
                                 booleanParam(name: 'INCLUDE_LINUX-ARM64', value: true),
-                                booleanParam(name: 'INCLUDE_MACOS-X86_64', value: (params.INCLUDE_MAC && isTriggeredByUser) || (x86_64MacIsAvailable && isTriggeredByTimer)),
-                                booleanParam(name: 'INCLUDE_MACOS-ARM64', value: (params.INCLUDE_MAC && isTriggeredByUser) || (armMacIsAvailable && isTriggeredByTimer)),
+                                booleanParam(name: 'INCLUDE_MACOS-X86_64', value: shouldIBuildForMacX86_64(params)),
+                                booleanParam(name: 'INCLUDE_MACOS-ARM64', value: shouldIBuildForMacARM64(params)),
                                 booleanParam(name: 'INCLUDE_WINDOWS-X86_64', value: shouldIBuildForWindows(params)),
                                 // booleanParam(name: 'USE_SONARQUBE', value: params.USE_SONARQUBE),
                                 booleanParam(name: 'PACKAGE_STANDALONE_WINDOWS_INSTALLER', value: shouldIBuildForWindows(params)),
-                                booleanParam(name: 'PACKAGE_MAC_OS_STANDALONE_X86_64', value: (params.INCLUDE_MAC && isTriggeredByUser) || (x86_64MacIsAvailable && isTriggeredByTimer)),
-                                booleanParam(name: 'PACKAGE_MAC_OS_STANDALONE_ARM64', value: (params.INCLUDE_MAC && isTriggeredByUser) || (armMacIsAvailable && isTriggeredByTimer)),
+                                booleanParam(name: 'PACKAGE_MAC_OS_STANDALONE_X86_64', value: shouldIBuildForMacX86_64(params)),
+                                booleanParam(name: 'PACKAGE_MAC_OS_STANDALONE_ARM64', value: shouldIBuildForMacARM64(params)),
                                 booleanParam(name: 'DEPLOY_PYPI', value: false),
                                 booleanParam(name: 'DEPLOY_STANDALONE_PACKAGERS', value: false),    
                             ]
@@ -168,8 +181,8 @@ pipeline {
                                 booleanParam(name: 'TEST_PACKAGES', value: true),
                                 booleanParam(name: 'INCLUDE_LINUX-ARM64', value: params.INCLUDE_LINUX_ARM),
                                 booleanParam(name: 'INCLUDE_LINUX-X86_64', value: true),
-                                booleanParam(name: 'INCLUDE_MACOS-X86_64', value: (params.INCLUDE_MAC && isTriggeredByUser) || (x86_64MacIsAvailable && isTriggeredByTimer)),
-                                booleanParam(name: 'INCLUDE_MACOS-ARM64', value: (params.INCLUDE_MAC && isTriggeredByUser) || (armMacIsAvailable && isTriggeredByTimer)),
+                                booleanParam(name: 'INCLUDE_MACOS-X86_64', value: shouldIBuildForMacX86_64(params)),
+                                booleanParam(name: 'INCLUDE_MACOS-ARM64', value: shouldIBuildForMacARM64(params)),
                                 booleanParam(name: 'INCLUDE_WINDOWS-X86_64', value: shouldIBuildForWindows(params)),
                                 booleanParam(name: 'USE_SONARQUBE', value: params.USE_SONARQUBE),
                             ]
@@ -210,8 +223,8 @@ pipeline {
                                 booleanParam(name: 'TEST_RUN_TOX', value: true),
                                 booleanParam(name: 'BUILD_PACKAGES', value: true),
                                 booleanParam(name: 'TEST_PACKAGES', value: true),
-                                booleanParam(name: 'INCLUDE_MACOS-ARM64', value: (params.INCLUDE_MAC && isTriggeredByUser) || (armMacIsAvailable && isTriggeredByTimer)),
-                                booleanParam(name: 'INCLUDE_MACOS-X86_64', value: (params.INCLUDE_MAC && isTriggeredByUser) || (x86_64MacIsAvailable && isTriggeredByTimer)),
+                                booleanParam(name: 'INCLUDE_MACOS-ARM64', value: shouldIBuildForMacARM64(params)),
+                                booleanParam(name: 'INCLUDE_MACOS-X86_64', value: shouldIBuildForMacX86_64(params)),
                                 booleanParam(name: 'INCLUDE_LINUX-ARM64', value: params.INCLUDE_LINUX_ARM),
                                 booleanParam(name: 'INCLUDE_LINUX-X86_64', value: true),
                                 booleanParam(name: 'INCLUDE_WINDOWS-X86_64', value: shouldIBuildForWindows(params)),
@@ -237,8 +250,8 @@ pipeline {
                                     booleanParam(name: 'USE_SONARQUBE', value: params.USE_SONARQUBE),
                                     booleanParam(name: 'BUILD_PACKAGES', value: true),
                                     booleanParam(name: 'TEST_PACKAGES', value: true),
-                                    booleanParam(name: 'INCLUDE_MACOS-ARM64', value: (params.INCLUDE_MAC && isTriggeredByUser) || (armMacIsAvailable && isTriggeredByTimer)),
-                                    booleanParam(name: 'INCLUDE_MACOS-X86_64', value: (params.INCLUDE_MAC && isTriggeredByUser) || (x86_64MacIsAvailable && isTriggeredByTimer)),
+                                    booleanParam(name: 'INCLUDE_MACOS-ARM64', value: shouldIBuildForMacARM64(params)),
+                                    booleanParam(name: 'INCLUDE_MACOS-X86_64', value: shouldIBuildForMacX86_64(params)),
                                     booleanParam(name: 'INCLUDE_LINUX-ARM64', value: params.INCLUDE_LINUX_ARM),
                                     booleanParam(name: 'INCLUDE_LINUX-X86_64', value: true),
                                     booleanParam(name: 'INCLUDE_WINDOWS-X86_64', value: shouldIBuildForWindows(params)),
@@ -266,8 +279,8 @@ pipeline {
                                     booleanParam(name: 'BUILD_PACKAGES', value: true),
                                     booleanParam(name: 'INCLUDE_LINUX-X86_64', value: true),
                                     booleanParam(name: 'INCLUDE_LINUX-ARM64', value: params.INCLUDE_LINUX_ARM),
-                                    booleanParam(name: 'INCLUDE_MACOS-ARM64', value: (params.INCLUDE_MAC && isTriggeredByUser) || (armMacIsAvailable && isTriggeredByTimer)),
-                                    booleanParam(name: 'INCLUDE_MACOS-X86_64', value: (params.INCLUDE_MAC && isTriggeredByUser) || (x86_64MacIsAvailable && isTriggeredByTimer)),
+                                    booleanParam(name: 'INCLUDE_MACOS-ARM64', value: shouldIBuildForMacARM64(params)),
+                                    booleanParam(name: 'INCLUDE_MACOS-X86_64', value: shouldIBuildForMacX86_64(params)),
                                     booleanParam(name: 'INCLUDE_WINDOWS-X86_64', value: shouldIBuildForWindows(params)),
                                     booleanParam(name: 'DEPLOY_DOCS', value: false),
                                     string(name: 'DEPLOY_DOCS_URL_SUBFOLDER', value: 'packager')
@@ -293,8 +306,8 @@ pipeline {
                                     booleanParam(name: 'BUILD_PACKAGES', value: true),
                                     booleanParam(name: 'TEST_PACKAGES', value: true),
                                     booleanParam(name: 'USE_SONARQUBE', value: params.USE_SONARQUBE),
-                                    booleanParam(name: 'INCLUDE_MACOS_ARM', value: (params.INCLUDE_MAC && isTriggeredByUser) || (armMacIsAvailable && isTriggeredByTimer)),
-                                    booleanParam(name: 'INCLUDE_MACOS_X86_64', value: (params.INCLUDE_MAC && isTriggeredByUser) || (x86_64MacIsAvailable && isTriggeredByTimer)),
+                                    booleanParam(name: 'INCLUDE_MACOS_ARM', value: shouldIBuildForMacARM64(params)),
+                                    booleanParam(name: 'INCLUDE_MACOS_X86_64', value: shouldIBuildForMacX86_64(params)),
                                     booleanParam(name: 'INCLUDE_LINUX_ARM', value: params.INCLUDE_LINUX_ARM),
                                     booleanParam(name: 'INCLUDE_LINUX_X86_64', value: true),
                                     booleanParam(name: 'INCLUDE_WINDOWS_X86_64', value: shouldIBuildForWindows(params)),
@@ -320,8 +333,8 @@ pipeline {
                                     booleanParam(name: 'RUN_MEMCHECK', value: true),
                                     booleanParam(name: 'USE_SONARQUBE', value: params.USE_SONARQUBE),
                                     booleanParam(name: 'BUILD_PACKAGES', value: true),
-                                    booleanParam(name: 'INCLUDE_MACOS_ARM', value: (params.INCLUDE_MAC && isTriggeredByUser) || (armMacIsAvailable && isTriggeredByTimer)),
-                                    booleanParam(name: 'INCLUDE_MACOS_X86_64', value: (params.INCLUDE_MAC && isTriggeredByUser) || (x86_64MacIsAvailable && isTriggeredByTimer)),
+                                    booleanParam(name: 'INCLUDE_MACOS_ARM', value: shouldIBuildForMacARM64(params)),
+                                    booleanParam(name: 'INCLUDE_MACOS_X86_64', value: shouldIBuildForMacX86_64(params)),
                                     booleanParam(name: 'INCLUDE_LINUX_ARM', value: params.INCLUDE_LINUX_ARM),
                                     booleanParam(name: 'INCLUDE_LINUX_X86_64', value: true),
                                     booleanParam(name: 'INCLUDE_WINDOWS_X86_64', value: shouldIBuildForWindows(params)),
@@ -349,8 +362,8 @@ pipeline {
                                     booleanParam(name: 'USE_SONARQUBE', value: params.USE_SONARQUBE),
                                     booleanParam(name: 'INCLUDE_LINUX-ARM64', value: params.INCLUDE_LINUX_ARM),
                                     booleanParam(name: 'INCLUDE_LINUX-X86_64', value: true),
-                                    booleanParam(name: 'INCLUDE_MACOS-ARM64', value: (params.INCLUDE_MAC && isTriggeredByUser) || (armMacIsAvailable && isTriggeredByTimer)),
-                                    booleanParam(name: 'INCLUDE_MACOS-X86_64', value: (params.INCLUDE_MAC && isTriggeredByUser) || (x86_64MacIsAvailable && isTriggeredByTimer)),
+                                    booleanParam(name: 'INCLUDE_MACOS-ARM64', value: shouldIBuildForMacARM64(params)),
+                                    booleanParam(name: 'INCLUDE_MACOS-X86_64', value: shouldIBuildForMacX86_64(params)),
                                     booleanParam(name: 'INCLUDE_WINDOWS-X86_64', value: shouldIBuildForWindows(params)),
                                     booleanParam(name: 'DEPLOY_HATHI_TOOL_BETA', value: false),
                                     booleanParam(name: 'DEPLOY_DOCS', value: false)
@@ -375,8 +388,8 @@ pipeline {
                                     booleanParam(name: 'TEST_RUN_TOX', value: true),
                                     booleanParam(name: 'BUILD_PACKAGES', value: true),
                                     booleanParam(name: 'TEST_PACKAGES', value: true),
-                                    booleanParam(name: 'INCLUDE_MACOS-ARM64', value: (params.INCLUDE_MAC && isTriggeredByUser) || (armMacIsAvailable && isTriggeredByTimer)),
-                                    booleanParam(name: 'INCLUDE_MACOS-X86_64', value: (params.INCLUDE_MAC && isTriggeredByUser) || (x86_64MacIsAvailable && isTriggeredByTimer)),
+                                    booleanParam(name: 'INCLUDE_MACOS-ARM64', value: shouldIBuildForMacARM64(params)),
+                                    booleanParam(name: 'INCLUDE_MACOS-X86_64', value: shouldIBuildForMacX86_64(params)),
                                     booleanParam(name: 'INCLUDE_LINUX-ARM64', value: params.INCLUDE_LINUX_ARM),
                                     booleanParam(name: 'INCLUDE_LINUX-X86_64', value: true),
                                     booleanParam(name: 'INCLUDE_WINDOWS-X86_64', value: shouldIBuildForWindows(params)),
@@ -403,8 +416,8 @@ pipeline {
                                     booleanParam(name: 'BUILD_PACKAGES', value: true),
                                     booleanParam(name: 'INCLUDE_LINUX-ARM64', value: params.INCLUDE_LINUX_ARM),
                                     booleanParam(name: 'INCLUDE_LINUX-X86_64', value: true),
-                                    booleanParam(name: 'INCLUDE_MACOS-ARM64', value: (params.INCLUDE_MAC && isTriggeredByUser) || (armMacIsAvailable && isTriggeredByTimer)),
-                                    booleanParam(name: 'INCLUDE_MACOS-X86_64', value: (params.INCLUDE_MAC && isTriggeredByUser) || (x86_64MacIsAvailable && isTriggeredByTimer)),
+                                    booleanParam(name: 'INCLUDE_MACOS-ARM64', value: shouldIBuildForMacARM64(params)),
+                                    booleanParam(name: 'INCLUDE_MACOS-X86_64', value: shouldIBuildForMacX86_64(params)),
                                     booleanParam(name: 'INCLUDE_WINDOWS-X86_64', value: shouldIBuildForWindows(params)),
                                     booleanParam(name: 'TEST_PACKAGES', value: true),
                                     booleanParam(name: 'DEPLOY_PYPI', value: false),
@@ -429,8 +442,8 @@ pipeline {
                                     booleanParam(name: 'TEST_RUN_TOX', value: true),
                                     booleanParam(name: 'BUILD_PACKAGES', value: true),
                                     booleanParam(name: 'USE_SONARQUBE', value: params.USE_SONARQUBE),
-                                    booleanParam(name: 'INCLUDE_MACOS-ARM64', value: (params.INCLUDE_MAC && isTriggeredByUser) || (armMacIsAvailable && isTriggeredByTimer)),
-                                    booleanParam(name: 'INCLUDE_MACOS-X86_64', value: (params.INCLUDE_MAC && isTriggeredByUser) || (x86_64MacIsAvailable && isTriggeredByTimer)),
+                                    booleanParam(name: 'INCLUDE_MACOS-ARM64', value: shouldIBuildForMacARM64(params)),
+                                    booleanParam(name: 'INCLUDE_MACOS-X86_64', value: shouldIBuildForMacX86_64(params)),
                                     booleanParam(name: 'INCLUDE_LINUX-ARM64', value: params.INCLUDE_LINUX_ARM),
                                     booleanParam(name: 'INCLUDE_LINUX-X86_64', value: params.INCLUDE_LINUX_ARM),
                                     booleanParam(name: 'INCLUDE_WINDOWS-X86_64', value: shouldIBuildForWindows(params)),
@@ -456,8 +469,8 @@ pipeline {
                                     booleanParam(name: 'TEST_RUN_TOX', value: true),
                                     booleanParam(name: 'USE_SONARQUBE', value: params.USE_SONARQUBE),
                                     booleanParam(name: 'BUILD_PACKAGES', value: true),
-                                    booleanParam(name: 'INCLUDE_MACOS_ARM', value: (params.INCLUDE_MAC && isTriggeredByUser) || (armMacIsAvailable && isTriggeredByTimer)),
-                                    booleanParam(name: 'INCLUDE_MACOS_X86_64', value: (params.INCLUDE_MAC && isTriggeredByUser) || (x86_64MacIsAvailable && isTriggeredByTimer)),
+                                    booleanParam(name: 'INCLUDE_MACOS_ARM', value: shouldIBuildForMacARM64(params)),
+                                    booleanParam(name: 'INCLUDE_MACOS_X86_64', value: shouldIBuildForMacX86_64(params)),
                                     booleanParam(name: 'INCLUDE_LINUX_ARM', value: params.INCLUDE_LINUX_ARM),
                                     booleanParam(name: 'INCLUDE_LINUX_X86_64', value: true),
                                     booleanParam(name: 'INCLUDE_WINDOWS_X86_64', value: shouldIBuildForWindows(params)),
@@ -510,10 +523,10 @@ pipeline {
                                     booleanParam(name: 'PACKAGE_STANDALONE_WINDOWS_INSTALLER', value: shouldIBuildForWindows(params)),
                                     booleanParam(name: 'INCLUDE_LINUX-ARM64', value: params.INCLUDE_LINUX_ARM),
                                     booleanParam(name: 'INCLUDE_LINUX-X86_64', value: true),
-                                    booleanParam(name: 'INCLUDE_MACOS-ARM64', value: (params.INCLUDE_MAC && isTriggeredByUser) || (armMacIsAvailable && isTriggeredByTimer)),
-                                    booleanParam(name: 'INCLUDE_MACOS-X86_64', value: (params.INCLUDE_MAC && isTriggeredByUser) || (x86_64MacIsAvailable && isTriggeredByTimer)),
+                                    booleanParam(name: 'INCLUDE_MACOS-ARM64', value: shouldIBuildForMacARM64(params)),
+                                    booleanParam(name: 'INCLUDE_MACOS-X86_64', value: shouldIBuildForMacX86_64(params)),
                                     booleanParam(name: 'INCLUDE_WINDOWS-X86_64', value: shouldIBuildForWindows(params)),
-                                    booleanParam(name: 'PACKAGE_MAC_OS_STANDALONE_DMG', value: (params.INCLUDE_MAC && isTriggeredByUser) || (armMacIsAvailable && x86_64MacIsAvailable && isTriggeredByTimer)),
+                                    booleanParam(name: 'PACKAGE_MAC_OS_STANDALONE_DMG', value: shouldIBuildForMacARM64(params) || shouldIBuildForMacX86_64(params)),
                                     booleanParam(name: 'DEPLOY_PYPI', value: false),
                                     booleanParam(name: 'DEPLOY_CHOCOLATEY', value: false),
                                     booleanParam(name: 'DEPLOY_DOCS', value: false)
