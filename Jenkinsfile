@@ -41,6 +41,7 @@ pipeline {
       booleanParam defaultValue: true,  description: 'Run nightly build for pyexiv2bind2',              name: "BUILD_pyexiv2bind2"
       booleanParam defaultValue: true,  description: 'Run nightly build for uiucprescon.getmarc2',      name: "BUILD_uiucprescon_getalmarc2"
       booleanParam defaultValue: true,  description: 'Run nightly build for uiucprescon.ocr',           name: "BUILD_uiucprescon_ocr"
+      booleanParam defaultValue: true,  description: 'Run nightly build for uiucprescon.pymediaconch',  name: "BUILD_PYMEDIACONCH"
       booleanParam defaultValue: true,  description: 'Run nightly build for HathiValidate',             name: "BUILD_HathiValidate"
       booleanParam defaultValue: true,  description: 'Run nightly build for PackageValidation',         name: "BUILD_PackageValidation"
       booleanParam defaultValue: true,  description: 'Run nightly build for speedwagon',                name: "BUILD_speedwagon"
@@ -159,6 +160,30 @@ pipeline {
                                 booleanParam(name: 'PACKAGE_MAC_OS_STANDALONE_ARM64', value: shouldIBuildForMacARM64(params)),
                                 booleanParam(name: 'DEPLOY_PYPI', value: false),
                                 booleanParam(name: 'DEPLOY_STANDALONE_PACKAGERS', value: false),    
+                            ]
+                        )
+                    }
+                }
+                stage("uiucprescon.pymediaconch"){
+                    options {
+                        warnError('uiucprescon.pymediaconch Build failed')
+                        retry(2)
+                    }
+                    when{
+                        equals expected: true, actual: params.BUILD_PYMEDIACONCH
+                    }
+                    steps{
+                        build(
+                            job: 'open source/uiucprescon.pymediaconch/main',
+                            parameters: [
+                                booleanParam(name: 'RUN_CHECKS', value: true),
+                                booleanParam(name: 'TEST_RUN_TOX', value: true),
+                                booleanParam(name: 'BUILD_PACKAGES', value: true),
+                                booleanParam(name: 'TEST_PACKAGES', value: true),
+                                booleanParam(name: 'INCLUDE_LINUX_X86_64', value: true),
+                                booleanParam(name: 'INCLUDE_MACOS_ARM', value: shouldIBuildForMacARM64(params)),
+                                booleanParam(name: 'INCLUDE_MACOS_X86_64', value: shouldIBuildForMacX86_64(params)),
+                                booleanParam(name: 'INCLUDE_WINDOWS_X86_64', value: shouldIBuildForWindows(params)),
                             ]
                         )
                     }
