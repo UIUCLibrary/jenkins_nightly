@@ -86,7 +86,7 @@ pipeline {
                         equals expected: true, actual: params.BUILD_cloudwagon
                     }
                     steps{
-                        retry(2){
+                        retry(1){
                             build(
                                 job: 'open source/cloudwagon/main',
                                 parameters: [
@@ -106,7 +106,7 @@ pipeline {
                 stage("Galatea"){
                     options {
                         warnError('Galatea Build failed')
-                        retry(2)
+                        retry(1)
                     }
                     when{
                         equals expected: true, actual: params.BUILD_galatea
@@ -137,7 +137,7 @@ pipeline {
                 stage("Tripwire"){
                     options {
                         warnError('Tripwire Build failed')
-                        retry(2)
+                        retry(1)
                     }
                     when{
                         equals expected: true, actual: params.BUILD_Tripwire
@@ -167,7 +167,7 @@ pipeline {
                 stage("uiucprescon.pymediaconch"){
                     options {
                         warnError('uiucprescon.pymediaconch Build failed')
-                        retry(2)
+                        retry(1)
                     }
                     when{
                         equals expected: true, actual: params.BUILD_PYMEDIACONCH
@@ -191,7 +191,7 @@ pipeline {
                 stage("HathiZip"){
                     options {
                         warnError('HathiZip Build failed')
-                        retry(2)
+                        retry(1)
                     }
                     when{
                         equals expected: true, actual: params.BUILD_HathiZip
@@ -222,7 +222,7 @@ pipeline {
                         equals expected: true, actual: params.BUILD_UIUCPRESCON_BUILD
                     }
                     steps{
-                        retry(2){
+                        retry(1){
                             build(
                                 job: 'open source/uiucprescon build/main',
                                 parameters: [
@@ -235,7 +235,7 @@ pipeline {
                 stage("pyhathiprep"){
                     options {
                         warnError('pyhathiprep Build failed')
-                        retry(2)
+                        retry(1)
                     }
                     when{
                         equals expected: true, actual: params.BUILD_pyhathiprep
@@ -267,7 +267,7 @@ pipeline {
                         equals expected: true, actual: params.BUILD_uiucprescon_images
                     }
                     steps{
-                        retry(2){
+                        retry(1){
                             build(
                                 job: 'open source/uiucprescon.images/master',
                                 parameters: [
@@ -294,7 +294,7 @@ pipeline {
                         equals expected: true, actual: params.BUILD_uiucprescon_packager
                     }
                     steps{
-                        retry(2){
+                        retry(1){
                             build(
                                 job: 'open source/uiucprescon.packager/master',
                                 parameters: [
@@ -322,7 +322,7 @@ pipeline {
                         equals expected: true, actual: params.BUILD_uiucprescon_imagevalidate
                     }
                     steps{
-                        retry(2){
+                        retry(1){
                             build(
                                 job: 'open source/uiucprescon.imagevalidate/master',
                                 parameters: [
@@ -350,7 +350,7 @@ pipeline {
                         equals expected: true, actual: params.BUILD_pyexiv2bind2
                     }
                     steps{
-                        retry(2){
+                        retry(1){
                             build(
                                 job: 'open source/pyexiv2bind2/master',
                                 parameters: [
@@ -377,7 +377,7 @@ pipeline {
                         equals expected: true, actual: params.BUILD_HathiValidate
                     }
                     steps{
-                        retry(2){
+                        retry(1){
                             build(
                                 job: 'open source/Hathi Validate/master',
                                 parameters: [
@@ -406,7 +406,7 @@ pipeline {
                         equals expected: true, actual: params.BUILD_PackageValidation
                     }
                     steps{
-                        retry(2){
+                        retry(1){
                             build(
                                 job: 'open source/PackageValidation/master',
                                 parameters: [
@@ -431,7 +431,7 @@ pipeline {
                         equals expected: true, actual: params.BUILD_speedwagon
                     }
                     steps{
-                        retry(2){
+                        retry(1){
                             build(
                                 job: 'open source/speedwagon/main',
                                 parameters: [
@@ -460,7 +460,7 @@ pipeline {
                         equals expected: true, actual: params.BUILD_uiucprescon_getalmarc2
                     }
                     steps{
-                        retry(2){
+                        retry(1){
                             build(
                                 job: 'open source/uiucprescon.getmarc2/master',
                                 parameters: [
@@ -486,7 +486,7 @@ pipeline {
                         equals expected: true, actual: params.BUILD_uiucprescon_ocr
                     }
                     steps{
-                        retry(2){
+                        retry(1){
                             build(
                                 job: 'open source/uiucprescon.ocr/master',
                                 parameters: [
@@ -509,7 +509,7 @@ pipeline {
                 stage("getmarcapi"){
                     options {
                         warnError('getmarcapi Build failed')
-                        retry(2)
+                        retry(1)
                     }
                     when{
                         equals expected: true, actual: params.BUILD_getmarcapi
@@ -531,7 +531,7 @@ pipeline {
                 stage("Uiuc Preson Workflows (speedwagon)"){
                     options {
                         warnError('Uiuc Preson Workflows Build failed')
-                        retry(2)
+                        retry(1)
                     }
                     when{
                         equals expected: true, actual: params.BUILD_uiupreson_workflows
