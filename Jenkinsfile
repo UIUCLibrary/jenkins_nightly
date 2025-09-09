@@ -50,7 +50,7 @@ pipeline {
       booleanParam defaultValue: true,  description: 'Run nightly build for Tripwire',                  name: "BUILD_Tripwire"
       booleanParam defaultValue: true,  description: 'Run nightly build for getmarcapi',                name: "BUILD_getmarcapi"
       booleanParam defaultValue: true,  description: 'Include Mac builds in pipelines',                 name: "INCLUDE_MAC"
-      booleanParam defaultValue: true,  description: 'Include Linux ARM builds in pipelines',           name: "INCLUDE_LINUX_ARM"
+      booleanParam defaultValue: false, description: 'Include Linux ARM builds in pipelines',           name: "INCLUDE_LINUX_ARM"
       booleanParam defaultValue: true,  description: 'Include Windows x86_64 builds in pipelines',      name: "INCLUDE_WINDOWS_X86_64"
       booleanParam defaultValue: true,  description: 'Send test data to Sonarqube',                     name: "USE_SONARQUBE"
 
