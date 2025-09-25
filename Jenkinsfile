@@ -47,6 +47,7 @@ pipeline {
       booleanParam defaultValue: true,  description: 'Run nightly build for speedwagon',                name: "BUILD_speedwagon"
       booleanParam defaultValue: true,  description: 'Run nightly build for uiucpreson_workflows',      name: "BUILD_uiupreson_workflows"
       booleanParam defaultValue: true,  description: 'Run nightly build for galatea',                   name: "BUILD_galatea"
+      booleanParam defaultValue: true,  description: 'Run nightly build for galatea config editor',     name: "BUILD_galatea_config_editor"
       booleanParam defaultValue: true,  description: 'Run nightly build for Tripwire',                  name: "BUILD_Tripwire"
       booleanParam defaultValue: true,  description: 'Run nightly build for getmarcapi',                name: "BUILD_getmarcapi"
       booleanParam defaultValue: true,  description: 'Include Mac builds in pipelines',                 name: "INCLUDE_MAC"
@@ -130,6 +131,28 @@ pipeline {
                                 booleanParam(name: 'PACKAGE_STANDALONE_WINDOWS_INSTALLER', value: shouldIBuildForWindows(params)),
                                 booleanParam(name: 'DEPLOY_STANDALONE_PACKAGERS', value: false),
                                 
+                            ]
+                        )
+                    }
+                }
+                stage("Galatea Configuration Editor"){
+                    options {
+                        warnError('Galatea Configuration Editor Build failed')
+                        retry(1)
+                    }
+                    when{
+                        equals expected: true, actual: params.BUILD_galatea_config_editor
+                    }
+                    steps{
+                        build(
+                            job: 'open source/Galatea Config Editor/main',
+                            parameters: [
+                                booleanParam(name: 'RUN_CHECKS', value: true),
+                                booleanParam(name: 'PACKAGE_MAC_OS_STANDALONE_DMG_X86_64', value: shouldIBuildForMacX86_64(params)),
+                                booleanParam(name: 'PACKAGE_MAC_OS_STANDALONE_DMG_ARM64', value: shouldIBuildForMacARM64(params)),
+                                booleanParam(name: 'PACKAGE_WINDOWS_INSTALLER', value: shouldIBuildForWindows(params)),
+                                booleanParam(name: 'DEPLOY_STANDALONE_PACKAGERS', value: false),
+
                             ]
                         )
                     }
