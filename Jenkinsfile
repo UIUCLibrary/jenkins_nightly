@@ -203,7 +203,7 @@ pipeline {
                                 booleanParam(name: 'BUILD_PACKAGES', value: true),
                                 booleanParam(name: 'TEST_PACKAGES', value: true),
                                 booleanParam(name: 'INCLUDE_LINUX_X86_64', value: true),
-                                booleanParam(name: 'INCLUDE_MACOS_ARM', value: shouldIBuildForMacARM64(params)),
+                                booleanParam(name: 'INCLUDE_MACOS', value: shouldIBuildForMacARM64(params)),
                                 booleanParam(name: 'INCLUDE_MACOS_X86_64', value: shouldIBuildForMacX86_64(params)),
                                 booleanParam(name: 'INCLUDE_WINDOWS_X86_64', value: shouldIBuildForWindows(params)),
                             ]
