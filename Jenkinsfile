@@ -71,7 +71,8 @@ pipeline {
                         booleanParam(name: 'AUDIT_FORMULA_ONLINE_OPTION', value: true),
                         booleanParam(name: 'BOTTLE_FORMULA', value: false),
                         booleanParam(name: 'BOTTLE_UPLOAD', value: false),
-                    ]
+                    ],
+                    propagate: false
                 )
             }
 
@@ -98,7 +99,8 @@ pipeline {
                                     booleanParam(name: 'PUBLISH_DOCKER', value: false),
                                     booleanParam(name: 'INCLUDE-arm64', value: params.INCLUDE_LINUX_ARM),
                                     booleanParam(name: 'INCLUDE-x86_64', value: true),
-                                ]
+                                ],
+                                propagate: false
                             )
                         }
                     }
@@ -129,8 +131,8 @@ pipeline {
                                 booleanParam(name: 'PACKAGE_MAC_OS_STANDALONE_ARM64', value: shouldIBuildForMacARM64(params)),
                                 booleanParam(name: 'PACKAGE_STANDALONE_WINDOWS_INSTALLER', value: shouldIBuildForWindows(params)),
                                 booleanParam(name: 'DEPLOY_STANDALONE_PACKAGERS', value: false),
-                                
-                            ]
+                            ],
+                            propagate: false
                         )
                     }
                 }
@@ -152,7 +154,8 @@ pipeline {
                                 booleanParam(name: 'PACKAGE_WINDOWS_INSTALLER', value: shouldIBuildForWindows(params)),
                                 booleanParam(name: 'DEPLOY_STANDALONE_PACKAGERS', value: false),
 
-                            ]
+                            ],
+                            propagate: false
                         )
                     }
                 }
@@ -182,7 +185,8 @@ pipeline {
                                 booleanParam(name: 'PACKAGE_MAC_OS_STANDALONE_ARM64', value: shouldIBuildForMacARM64(params)),
                                 booleanParam(name: 'DEPLOY_PYPI', value: false),
                                 booleanParam(name: 'DEPLOY_STANDALONE_PACKAGERS', value: false),    
-                            ]
+                            ],
+                            propagate: false
                         )
                     }
                 }
@@ -206,7 +210,8 @@ pipeline {
                                 booleanParam(name: 'INCLUDE_MACOS', value: shouldIBuildForMacARM64(params)),
                                 booleanParam(name: 'INCLUDE_MACOS_X86_64', value: shouldIBuildForMacX86_64(params)),
                                 booleanParam(name: 'INCLUDE_WINDOWS_X86_64', value: shouldIBuildForWindows(params)),
-                            ]
+                            ],
+                            propagate: false
                         )
                     }
                 }
@@ -232,7 +237,8 @@ pipeline {
                                 booleanParam(name: 'INCLUDE_MACOS-ARM64', value: shouldIBuildForMacARM64(params)),
                                 booleanParam(name: 'INCLUDE_WINDOWS-X86_64', value: shouldIBuildForWindows(params)),
                                 booleanParam(name: 'USE_SONARQUBE', value: params.USE_SONARQUBE),
-                            ]
+                            ],
+                            propagate: false
                         )
                     }
                 }
@@ -249,7 +255,8 @@ pipeline {
                                 job: 'open source/uiucprescon build/main',
                                 parameters: [
                                     booleanParam(name: 'TEST_RUN_TOX', value: true),
-                                ]
+                                ],
+                                propagate: false
                             )
                         }
                     }
@@ -277,7 +284,8 @@ pipeline {
                                 booleanParam(name: 'INCLUDE_WINDOWS-X86_64', value: shouldIBuildForWindows(params)),
                                 booleanParam(name: 'USE_SONARQUBE', value: params.USE_SONARQUBE),
                                 booleanParam(name: 'DEPLOY_DOCS', value: false),
-                            ]
+                            ],
+                            propagate: false
                         )
                     }
                 }
@@ -303,7 +311,8 @@ pipeline {
                                     booleanParam(name: 'INCLUDE_LINUX-X86_64', value: true),
                                     booleanParam(name: 'INCLUDE_WINDOWS-X86_64', value: shouldIBuildForWindows(params)),
                                     booleanParam(name: 'DEPLOY_DOCS', value: false)
-                                ]
+                                ],
+                                propagate: false
                             )
                         }
                     }
@@ -331,7 +340,8 @@ pipeline {
                                     booleanParam(name: 'INCLUDE_WINDOWS-X86_64', value: shouldIBuildForWindows(params)),
                                     booleanParam(name: 'DEPLOY_DOCS', value: false),
                                     string(name: 'DEPLOY_DOCS_URL_SUBFOLDER', value: 'packager')
-                                ]
+                                ],
+                                propagate: false
                             )
                         }
                     }
@@ -359,7 +369,8 @@ pipeline {
                                     booleanParam(name: 'INCLUDE_LINUX_X86_64', value: true),
                                     booleanParam(name: 'INCLUDE_WINDOWS_X86_64', value: shouldIBuildForWindows(params)),
                                     booleanParam(name: 'DEPLOY_DOCS', value: false),
-                                ]
+                                ],
+                                propagate: false
                             )
                         }
                     }
@@ -386,7 +397,8 @@ pipeline {
                                     booleanParam(name: 'INCLUDE_LINUX_X86_64', value: true),
                                     booleanParam(name: 'INCLUDE_WINDOWS_X86_64', value: shouldIBuildForWindows(params)),
                                     booleanParam(name: 'DEPLOY_DOCS', value: false)
-                                ]
+                                ],
+                                propagate: false
                             )
                         }
                     }
@@ -414,7 +426,8 @@ pipeline {
                                     booleanParam(name: 'INCLUDE_WINDOWS-X86_64', value: shouldIBuildForWindows(params)),
                                     booleanParam(name: 'DEPLOY_HATHI_TOOL_BETA', value: false),
                                     booleanParam(name: 'DEPLOY_DOCS', value: false)
-                                ]
+                                ],
+                                propagate: false
                             )
                         }
                     }
@@ -440,7 +453,8 @@ pipeline {
                                     booleanParam(name: 'INCLUDE_LINUX-ARM64', value: params.INCLUDE_LINUX_ARM),
                                     booleanParam(name: 'INCLUDE_LINUX-X86_64', value: true),
                                     booleanParam(name: 'INCLUDE_WINDOWS-X86_64', value: shouldIBuildForWindows(params)),
-                                ]
+                                ],
+                                propagate: false
                             )
                         }
                     }
@@ -469,7 +483,8 @@ pipeline {
                                     booleanParam(name: 'TEST_PACKAGES', value: true),
                                     booleanParam(name: 'DEPLOY_PYPI', value: false),
                                     booleanParam(name: 'DEPLOY_DOCS', value: false),
-                                ]
+                                ],
+                                propagate: false
                             )
                         }
                     }
@@ -495,7 +510,8 @@ pipeline {
                                     booleanParam(name: 'INCLUDE_LINUX-X86_64', value: true),
                                     booleanParam(name: 'INCLUDE_WINDOWS-X86_64', value: shouldIBuildForWindows(params)),
                                     booleanParam(name: 'BUILD_CHOCOLATEY_PACKAGE', value: shouldIBuildForWindows(params)),
-                                ]
+                                ],
+                                propagate: false
                             )
                         }
                     }
@@ -523,7 +539,8 @@ pipeline {
                                     booleanParam(name: 'INCLUDE_WINDOWS_X86_64', value: shouldIBuildForWindows(params)),
                                     booleanParam(name: 'TEST_PACKAGES', value: true),
                                     booleanParam(name: 'DEPLOY_DOCS', value: false)
-                                ]
+                                ],
+                                propagate: false
                             )
                         }
                     }
@@ -546,7 +563,8 @@ pipeline {
                                     booleanParam(name: 'INCLUDE_LINUX-ARM64', value: params.INCLUDE_LINUX_ARM),
                                     booleanParam(name: 'INCLUDE_LINUX-X86_64', value: true),
                                     booleanParam(name: 'DEPLOY_DOCS', value: false)
-                                ]
+                                ],
+                                propagate: false
                         )
                     }
                 }
@@ -577,7 +595,8 @@ pipeline {
                                     booleanParam(name: 'DEPLOY_PYPI', value: false),
                                     booleanParam(name: 'DEPLOY_CHOCOLATEY', value: false),
                                     booleanParam(name: 'DEPLOY_DOCS', value: false)
-                                ]
+                                ],
+                                propagate: false
                         )
                     }
                 }
