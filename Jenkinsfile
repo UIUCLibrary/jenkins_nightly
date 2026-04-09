@@ -27,7 +27,7 @@ pipeline {
     agent none
     options {
       disableConcurrentBuilds()
-      timeout(time: 6, unit: 'HOURS')
+      timeout(time: 10, unit: 'HOURS')
     }
     parameters {
       booleanParam defaultValue: true,  description: 'Audit homebrew-uiucprescon formulas and casks',   name: "AUDIT_HOMEBREW"
