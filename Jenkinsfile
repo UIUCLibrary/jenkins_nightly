@@ -61,7 +61,10 @@ pipeline {
                 warnError('homebrew-uiucprescon failed audit')
             }
             when{
-                equals expected: true, actual: params.AUDIT_HOMEBREW
+                allOf{
+                    equals expected: true, actual: params.AUDIT_HOMEBREW
+                    equals expected: true, actual: (nodesByLabel('mac && homebrew').size() > 0)
+                }
             }
             steps{
                 build(
