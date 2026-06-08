@@ -598,6 +598,14 @@ pipeline {
                             job: 'open source/speedwagon-contrib/main',
                             parameters: [
                                 booleanParam(name: 'RUN_CHECKS', value: true),
+                                booleanParam(name: 'TEST_RUN_TOX', value: true),
+                                booleanParam(name: 'BUILD_PACKAGES', value: true),
+                                booleanParam(name: 'TEST_PACKAGES', value: true),
+                                booleanParam(name: 'INCLUDE_LINUX-ARM64', value: params.INCLUDE_LINUX_ARM),
+                                booleanParam(name: 'INCLUDE_LINUX-X86_64', value: true),
+                                booleanParam(name: 'INCLUDE_MACOS-ARM64', value: shouldIBuildForMacARM64(params)),
+                                booleanParam(name: 'INCLUDE_MACOS-X86_64', value: shouldIBuildForMacX86_64(params)),
+                                booleanParam(name: 'INCLUDE_WINDOWS-X86_64', value: shouldIBuildForWindows(params)),
                             ],
                         )
                     }
