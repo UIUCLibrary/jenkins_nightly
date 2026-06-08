@@ -46,6 +46,7 @@ pipeline {
       booleanParam defaultValue: true,  description: 'Run nightly build for PackageValidation',         name: "BUILD_PackageValidation"
       booleanParam defaultValue: true,  description: 'Run nightly build for speedwagon',                name: "BUILD_speedwagon"
       booleanParam defaultValue: true,  description: 'Run nightly build for uiucpreson_workflows',      name: "BUILD_uiupreson_workflows"
+      booleanParam defaultValue: true,  description: 'Run nightly build for speedwagon_contrib',        name: "BUILD_speedwagon_contrib"
       booleanParam defaultValue: true,  description: 'Run nightly build for galatea',                   name: "BUILD_galatea"
       booleanParam defaultValue: true,  description: 'Run nightly build for galatea config editor',     name: "BUILD_galatea_config_editor"
       booleanParam defaultValue: true,  description: 'Run nightly build for Tripwire',                  name: "BUILD_Tripwire"
@@ -580,6 +581,23 @@ pipeline {
                                 booleanParam(name: 'DEPLOY_PYPI', value: false),
                                 booleanParam(name: 'DEPLOY_CHOCOLATEY', value: false),
                                 booleanParam(name: 'DEPLOY_DOCS', value: false)
+                            ],
+                        )
+                    }
+                }
+                stage("Speedwagon contributed workflows"){
+                    options {
+                        warnError('Speedwagon contributed Workflows Build failed')
+                        retry(1)
+                    }
+                    when{
+                        equals expected: true, actual: params.BUILD_speedwagon_contrib
+                    }
+                    steps{
+                        build(
+                            job: 'open source/speedwagon-contrib/main',
+                            parameters: [
+                                booleanParam(name: 'RUN_CHECKS', value: true),
                             ],
                         )
                     }
