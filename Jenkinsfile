@@ -47,6 +47,7 @@ pipeline {
       booleanParam defaultValue: true,  description: 'Run nightly build for speedwagon',                name: "BUILD_speedwagon"
       booleanParam defaultValue: true,  description: 'Run nightly build for uiucpreson_workflows',      name: "BUILD_uiupreson_workflows"
       booleanParam defaultValue: true,  description: 'Run nightly build for speedwagon_contrib',        name: "BUILD_speedwagon_contrib"
+      booleanParam defaultValue: true,  description: 'Run nightly build for speedwagon scripts',        name: "BUILD_speedwagon_scripts"
       booleanParam defaultValue: true,  description: 'Run nightly build for galatea',                   name: "BUILD_galatea"
       booleanParam defaultValue: true,  description: 'Run nightly build for galatea config editor',     name: "BUILD_galatea_config_editor"
       booleanParam defaultValue: true,  description: 'Run nightly build for Tripwire',                  name: "BUILD_Tripwire"
@@ -606,6 +607,32 @@ pipeline {
                                 booleanParam(name: 'INCLUDE_MACOS-ARM64', value: shouldIBuildForMacARM64(params)),
                                 booleanParam(name: 'INCLUDE_MACOS-X86_64', value: shouldIBuildForMacX86_64(params)),
                                 booleanParam(name: 'INCLUDE_WINDOWS-X86_64', value: shouldIBuildForWindows(params)),
+                            ],
+                        )
+                    }
+                }
+                stage("Speedwagon scripts"){
+                    options {
+                        warnError('Speedwagon scripts')
+                        retry(1)
+                    }
+                    when{
+                        equals expected: true, actual: params.BUILD_speedwagon_scripts
+                    }
+                    steps{
+                        build(
+                            job: 'open source/speedwagon-scripts/main',
+                            parameters: [
+                                booleanParam(name: 'RUN_CHECKS', value: true),
+                                booleanParam(name: 'TEST_RUN_TOX', value: true),
+                                booleanParam(name: 'BUILD_PACKAGES', value: true),
+                                booleanParam(name: 'TEST_PACKAGES', value: true),
+                                booleanParam(name: 'INCLUDE_LINUX-ARM64', value: params.INCLUDE_LINUX_ARM),
+                                booleanParam(name: 'INCLUDE_LINUX-X86_64', value: true),
+                                booleanParam(name: 'INCLUDE_MACOS-ARM64', value: shouldIBuildForMacARM64(params)),
+                                booleanParam(name: 'INCLUDE_MACOS-X86_64', value: shouldIBuildForMacX86_64(params)),
+                                booleanParam(name: 'INCLUDE_WINDOWS-X86_64', value: shouldIBuildForWindows(params)),
+                                booleanParam(name: 'CREATE_GITHUB_RELEASE-X86_64', value: false),
                             ],
                         )
                     }
